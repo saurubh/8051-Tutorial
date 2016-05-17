@@ -1,0 +1,175 @@
+BL51 BANKED LINKER/LOCATER V6.20                                                        08/21/2014  13:11:08  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.20, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE testupdwn.obj TO testupdwn
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  testupdwn.obj (TESTUPDWN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?SIDIV)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  testupdwn (TESTUPDWN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     000AH     UNIT         ?DT?TESTUPDWN
+            DATA    0012H     0002H     UNIT         _DATA_GROUP_
+            IDATA   0014H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0096H     UNIT         ?PR?_DISPLAY?TESTUPDWN
+            CODE    0896H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0922H     008BH     UNIT         ?C?LIB_CODE
+            CODE    09ADH     0039H     UNIT         ?PR?MAIN?TESTUPDWN
+            CODE    09E6H     0024H     UNIT         ?PR?_DELAY?TESTUPDWN
+            CODE    0A0AH     000DH     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   testupdwn (TESTUPDWN)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?TESTUPDWN
+  +--> ?C_INITSEG
+
+?PR?MAIN?TESTUPDWN             -----    -----
+  +--> ?PR?_DISPLAY?TESTUPDWN
+
+?PR?_DISPLAY?TESTUPDWN         0012H    0002H
+  +--> ?PR?_DELAY?TESTUPDWN
+
+
+
+SYMBOL TABLE OF MODULE:  testupdwn (TESTUPDWN)
+BL51 BANKED LINKER/LOCATER V6.20                                                      08/21/2014  13:11:08  PAGE 2
+
+
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        TESTUPDWN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  C:09EAH         PUBLIC        _delay
+  B:0090H.6       PUBLIC        sw1
+  B:0090H.7       PUBLIC        sw2
+  C:09ADH         PUBLIC        main
+  D:0008H         PUBLIC        a
+  B:0090H.0       PUBLIC        sel1
+  B:0090H.1       PUBLIC        sel2
+  B:0090H.2       PUBLIC        sel3
+  B:0090H.3       PUBLIC        sel4
+  C:0804H         PUBLIC        _display
+  C:09E6H         SYMBOL        L?0024
+  -------         PROC          L?0023
+  -------         ENDPROC       L?0023
+  C:09E6H         SYMBOL        L?0024
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        itime
+  -------         DO            
+  D:0004H         SYMBOL        j
+  D:0002H         SYMBOL        k
+  -------         ENDDO         
+  C:09EAH         LINE#         10
+  C:09EAH         LINE#         11
+  C:09EAH         LINE#         13
+  C:09F4H         LINE#         14
+  C:0A09H         LINE#         15
+  -------         ENDPROC       _DELAY
+  C:0800H         SYMBOL        L?0026
+  -------         PROC          L?0025
+  -------         ENDPROC       L?0025
+  C:0800H         SYMBOL        L?0026
+  -------         PROC          _DISPLAY
+  D:0012H         SYMBOL        i
+  C:0804H         LINE#         16
+  C:0808H         LINE#         17
+  C:0808H         LINE#         18
+  C:0816H         LINE#         19
+  C:0825H         LINE#         20
+  C:0827H         LINE#         21
+  C:082AH         LINE#         22
+  C:082CH         LINE#         24
+  C:083EH         LINE#         25
+  C:084DH         LINE#         26
+  C:084FH         LINE#         27
+  C:0852H         LINE#         28
+  C:0854H         LINE#         30
+  C:0866H         LINE#         31
+  C:0875H         LINE#         32
+  C:0877H         LINE#         33
+  C:087AH         LINE#         34
+BL51 BANKED LINKER/LOCATER V6.20                                                      08/21/2014  13:11:08  PAGE 3
+
+
+  C:087CH         LINE#         36
+  C:088EH         LINE#         37
+  C:0890H         LINE#         38
+  C:0893H         LINE#         39
+  C:0895H         LINE#         41
+  -------         ENDPROC       _DISPLAY
+  -------         PROC          MAIN
+  -------         DO            
+  D:0082H         SYMBOL        i
+  -------         ENDDO         
+  C:09ADH         LINE#         43
+  C:09ADH         LINE#         44
+  C:09ADH         LINE#         45
+  C:09B0H         LINE#         47
+  C:09B0H         LINE#         48
+  C:09B0H         LINE#         49
+  C:09B3H         LINE#         50
+  C:09B3H         LINE#         51
+  C:09B6H         LINE#         52
+  C:09B6H         LINE#         53
+  C:09B7H         LINE#         54
+  C:09BAH         LINE#         55
+  C:09BFH         LINE#         56
+  C:09BFH         LINE#         57
+  C:09C9H         LINE#         58
+  C:09C9H         LINE#         59
+  C:09CEH         LINE#         60
+  C:09D3H         LINE#         61
+  C:09D3H         LINE#         62
+  C:09D3H         LINE#         63
+  C:09D6H         LINE#         64
+  C:09D6H         LINE#         65
+  C:09DEH         LINE#         66
+  C:09E1H         LINE#         67
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        TESTUPDWN
+
+  -------         MODULE        ?C?SIDIV
+  C:0922H         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
+
+  -------         MODULE        ?C?UIDIV
+  C:0958H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00FFH BYTE (12%) *
+******************************************************************************
+
+Program Size: data=21.0 xdata=0 code=538
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

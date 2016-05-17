@@ -1,0 +1,46 @@
+C51 COMPILER V8.18   HYPSEND                                                               08/29/2014 08:26:30 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE HYPSEND
+OBJECT MODULE PLACED IN hypsend.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE hypsend.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          void Tx_char(unsigned char);
+   3          void main()
+   4          {
+   5   1          TMOD = 0x20;
+   6   1          TH1 = 0xfd;
+   7   1          SCON = 0x50;
+   8   1          TR1 = 1;
+   9   1        while(1)
+  10   1          {
+  11   2              Tx_char('H');
+  12   2              Tx_char('E');
+  13   2            Tx_char('L');
+  14   2            Tx_char('L');
+  15   2            Tx_char('O');
+  16   2        }
+  17   1      }
+  18          void Tx_char(unsigned char x)
+  19          {
+  20   1        SBUF = x;
+  21   1      while(TI==0);
+  22   1      TI=0;
+  23   1      } 
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     46    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,100 @@
+BL51 BANKED LINKER/LOCATER V6.20                                                        08/18/2014  18:43:43  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.20, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE 1hz timer.obj TO 1hz timer
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  1hz timer.obj (1HZ_TIMER)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  1hz timer (1HZ_TIMER)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         _DATA_GROUP_
+            IDATA   000AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     001DH     UNIT         ?PR?MAIN?1HZ_TIMER
+            CODE    081DH     0013H     UNIT         ?PR?T1M1DELAY?1HZ_TIMER
+            CODE    0830H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   1hz timer (1HZ_TIMER)
+
+
+SEGMENT                           DATA_GROUP 
+  +--> CALLED SEGMENT           START    LENGTH
+-----------------------------------------------
+?C_C51STARTUP                   -----    -----
+  +--> ?PR?MAIN?1HZ_TIMER
+
+?PR?MAIN?1HZ_TIMER              0008H    0002H
+  +--> ?PR?T1M1DELAY?1HZ_TIMER
+
+
+
+SYMBOL TABLE OF MODULE:  1hz timer (1HZ_TIMER)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        1HZ_TIMER
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  C:0800H         PUBLIC        main
+  D:0089H         PUBLIC        TMOD
+  B:00A0H.0       PUBLIC        led
+  B:0088H.7       PUBLIC        TF1
+BL51 BANKED LINKER/LOCATER V6.20                                                      08/18/2014  18:43:43  PAGE 2
+
+
+  D:008DH         PUBLIC        TH1
+  D:008BH         PUBLIC        TL1
+  C:081DH         PUBLIC        t1m1delay
+  B:0088H.6       PUBLIC        TR1
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        z
+  -------         ENDDO         
+  C:0800H         LINE#         4
+  C:0800H         LINE#         5
+  C:0800H         LINE#         7
+  C:0800H         LINE#         8
+  C:0800H         LINE#         9
+  C:0802H         LINE#         10
+  C:0807H         LINE#         11
+  -------         ENDPROC       MAIN
+  -------         PROC          T1M1DELAY
+  C:081DH         LINE#         14
+  C:081DH         LINE#         15
+  C:081DH         LINE#         16
+  C:0820H         LINE#         17
+  C:0823H         LINE#         18
+  C:0826H         LINE#         19
+  C:0828H         LINE#         20
+  C:082BH         LINE#         21
+  C:082DH         LINE#         22
+  C:082FH         LINE#         23
+  -------         ENDPROC       T1M1DELAY
+  -------         ENDMOD        1HZ_TIMER
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0030H BYTE ( 2%) *
+******************************************************************************
+
+Program Size: data=11.0 xdata=0 code=63
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,373 @@
+C51 COMPILER V8.18   PASS1                                                                 09/06/2014 22:11:03 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE PASS1
+OBJECT MODULE PLACED IN .\hex\pass1.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE pass1.c BROWSE DEBUG OBJECTEXTEND TABS(2) OBJECT(.\hex\pass1.obj)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #define dataport P2
+   3          #define sec 100
+   4          sbit rs = P3^0;
+   5          sbit rw = P3^1;
+   6          sbit en = P3^2;
+   7          
+   8          sbit col1=P1^4;
+   9          sbit col2=P1^5;
+  10          sbit col3=P1^6;
+  11          sbit row1=P1^0;
+  12          sbit row2=P1^1;
+  13          sbit row3=P1^2;
+  14          sbit row4=P1^3;
+  15          sbit lock_output=P1^7;
+  16          
+  17          int check=0;
+  18          int digit[4]={0,0,0,0};
+  19          int dig_one = 9;
+  20          int dig_two = 6;
+  21          int dig_three = 1;
+  22          int dig_four = 2;
+  23          int i,count=0;
+  24          
+  25          void delay(unsigned int msec) //Time delay function
+  26          {
+  27   1      int i,j ;
+  28   1      for(i=0;i<msec;i++)
+  29   1        for(j=0;j<1275;j++);
+  30   1      }
+  31          
+  32          void lcd_cmd(unsigned char item) //Function to send command to LCD
+  33          {
+  34   1      dataport = item;
+  35   1      rs= 0;
+  36   1      rw=0;
+  37   1      en=1;
+  38   1      delay(1);
+  39   1      en=0;
+  40   1      return;
+  41   1      }
+  42          
+  43          void lcd_data(unsigned char item) // Function to send data to LCD
+  44          {
+  45   1      dataport = item;
+  46   1      rs= 1;
+  47   1      rw=0;
+  48   1      en=1;
+  49   1      delay(1);
+  50   1      en=0;
+  51   1      return;
+  52   1      }
+  53          
+  54          void lcd_data_string(unsigned char *str)  // Function to send string to LCD
+  55          {
+C51 COMPILER V8.18   PASS1                                                                 09/06/2014 22:11:03 PAGE 2   
+
+  56   1      int i=0;
+  57   1      while(str[i]!='\0')
+  58   1      {
+  59   2        lcd_data(str[i]);
+  60   2        i++;
+  61   2        //delay(10);
+  62   2      }
+  63   1      return;
+  64   1      }
+  65          
+  66          void lcd(unsigned char str[10])  // Function to send string to LCD
+  67          {
+  68   1      lcd_cmd(0x38);
+  69   1      lcd_cmd(0x0e);
+  70   1      lcd_cmd(0x06);  
+  71   1      lcd_data_string(str);
+  72   1      }
+  73          
+  74          void ans()
+  75          {
+  76   1      if(check>3)
+  77   1      {
+  78   2        lcd_cmd(0x01);
+  79   2        lcd_cmd(0x80);
+  80   2        lcd("Please wait...");
+  81   2        lcd_cmd(0xc0);
+  82   2        lcd("while check password");
+  83   2          delay(200);
+  84   2        lcd_cmd(0x01);
+  85   2        lcd_cmd(0x82);
+  86   2        lcd_data_string(" name - viru");
+  87   2        lcd_cmd(0xc3);
+  88   2        lcd("TISHITU");
+  89   2        lock_output=1;
+  90   2        delay(500);
+  91   2      }
+  92   1      else
+  93   1      {
+  94   2          lcd_cmd(0x01);
+  95   2        lcd_cmd(0x80);
+  96   2        lcd("Please wait...");
+  97   2        lcd_cmd(0xc0);
+  98   2        lcd("while check password");
+  99   2          delay(200);
+ 100   2        lcd_cmd(0x01);
+ 101   2        lcd_cmd(0x82);
+ 102   2        lcd_data_string(" WRONG PASSWORD");
+ 103   2        lock_output=0;
+ 104   2        count++;
+ 105   2        delay(500);
+ 106   2      }                   
+ 107   1      }
+ 108          
+ 109          void code_check() // Function to check password
+ 110          {
+ 111   1      if(i<=3 )
+ 112   1      {
+ 113   2        switch((i+1))
+ 114   2        {
+ 115   3         case 1: {
+ 116   4            if(dig_one==digit[0])
+ 117   4            {
+C51 COMPILER V8.18   PASS1                                                                 09/06/2014 22:11:03 PAGE 3   
+
+ 118   5             check=check+1;
+ 119   5            }
+ 120   4            break;
+ 121   4           }
+ 122   3      
+ 123   3         case 2: {
+ 124   4            if(dig_two==digit[1])
+ 125   4            {
+ 126   5             check=check+1;
+ 127   5            }
+ 128   4            break;
+ 129   4           }
+ 130   3          
+ 131   3         case 3: {
+ 132   4            if(dig_three==digit[2])
+ 133   4            {
+ 134   5             check=check+1;
+ 135   5            }
+ 136   4            break;
+ 137   4            }
+ 138   3          
+ 139   3         case 4: {
+ 140   4            if(dig_four==digit[3])
+ 141   4            {
+ 142   5             check=check+1;
+ 143   5            }
+ 144   4            break;
+ 145   4           }
+ 146   3        }
+ 147   2      }
+ 148   1      if(i==3)
+ 149   1      {
+ 150   2        ans();
+ 151   2      }
+ 152   1      }
+ 153          
+ 154          
+ 155          void display(int a) //Display function
+ 156          {
+ 157   1      switch(a)
+ 158   1      { 
+ 159   2        case 1:{
+ 160   3          lcd_data('*');
+ 161   3          delay(30);
+ 162   3          digit[i]=1;
+ 163   3          code_check();
+ 164   3          break;
+ 165   3          }
+ 166   2        case 2:{
+ 167   3          lcd_data('*');
+ 168   3          delay(30);
+ 169   3          digit[i]=2;
+ 170   3          code_check(); 
+ 171   3          break;
+ 172   3          }
+ 173   2        case 3:{
+ 174   3          lcd_data('*');
+ 175   3          delay(30);
+ 176   3          digit[i]=3;
+ 177   3          code_check();
+ 178   3          break; 
+ 179   3          }
+C51 COMPILER V8.18   PASS1                                                                 09/06/2014 22:11:03 PAGE 4   
+
+ 180   2        case 4:{
+ 181   3          lcd_data('*');
+ 182   3          delay(30);
+ 183   3          digit[i]=4;
+ 184   3          code_check();
+ 185   3          break;
+ 186   3          }
+ 187   2        case 5:{
+ 188   3          lcd_data('*');
+ 189   3          delay(30);
+ 190   3          digit[i]=5;
+ 191   3          code_check();
+ 192   3          break;
+ 193   3          }
+ 194   2        case 6:{
+ 195   3          lcd_data('*');
+ 196   3          delay(30);
+ 197   3          digit[i]=6;
+ 198   3          code_check();
+ 199   3          break;
+ 200   3          }
+ 201   2        case 7:{
+ 202   3          lcd_data('*');
+ 203   3          delay(30);
+ 204   3          digit[i]=7;
+ 205   3          code_check();
+ 206   3          break;
+ 207   3          }
+ 208   2        case 8:{
+ 209   3          lcd_data('*');
+ 210   3          delay(30);
+ 211   3          digit[i]=8;
+ 212   3          code_check();
+ 213   3          break;
+ 214   3          }
+ 215   2        case 9:{
+ 216   3          lcd_data('*');
+ 217   3          delay(30);
+ 218   3          digit[i]=9;
+ 219   3          code_check();
+ 220   3          break;
+ 221   3          }
+ 222   2        case 0:{
+ 223   3          lcd_data('*');
+ 224   3          delay(30);
+ 225   3          digit[i]=0;
+ 226   3          code_check();
+ 227   3          break;
+ 228   3          }
+ 229   2      }
+ 230   1      }
+ 231          
+ 232          void check_col1()
+ 233          {
+ 234   1      row1=row2=row3=row4=1;
+ 235   1      row1=0;
+ 236   1      if(col1==0)
+ 237   1        display(1);
+ 238   1      row1=1;
+ 239   1      row2=0;
+ 240   1      if(col1==0)
+ 241   1        display(4);
+C51 COMPILER V8.18   PASS1                                                                 09/06/2014 22:11:03 PAGE 5   
+
+ 242   1      row2=1;
+ 243   1      row3=0;
+ 244   1      if(col1==0)
+ 245   1        display(7);
+ 246   1      row3=1;
+ 247   1      row4=0;
+ 248   1      if(col1==0)
+ 249   1      {
+ 250   2        row4=1;
+ 251   2      }
+ 252   1      }
+ 253          
+ 254          void check_col2()
+ 255          {
+ 256   1      row1=row2=row3=row4=1;
+ 257   1      row1=0;
+ 258   1      if(col2==0)
+ 259   1        display(2);
+ 260   1      row1=1;
+ 261   1      row2=0;
+ 262   1      if(col2==0)
+ 263   1        display(5);
+ 264   1      row2=1;
+ 265   1      row3=0;
+ 266   1      if(col2==0)
+ 267   1        display(8);
+ 268   1      row3=1;
+ 269   1      row4=0;
+ 270   1      if(col2==0)
+ 271   1        display(0);
+ 272   1      row4=1;
+ 273   1      }
+ 274          
+ 275          void check_col3()
+ 276          {
+ 277   1      row1=row2=row3=row4=1;
+ 278   1      row1=0;
+ 279   1      if(col3==0)
+ 280   1        display(3);
+ 281   1      row1=1;
+ 282   1      row2=0;
+ 283   1      if(col3==0)
+ 284   1        display(6);
+ 285   1      row2=1;
+ 286   1      row3=0;
+ 287   1      if(col3==0)
+ 288   1        display(9);
+ 289   1      row3=1;
+ 290   1      row4=0;
+ 291   1      if(col3==0)
+ 292   1       row4=1;
+ 293   1      }
+ 294          
+ 295          void main()
+ 296          {
+ 297   1        lock_output = 0;
+ 298   1      col1=col2=col3=1;
+ 299   1      while(1)
+ 300   1      {
+ 301   2        lcd_cmd(0x01);
+ 302   2        lcd_cmd(0x83);
+ 303   2        lcd("WELCOME");
+C51 COMPILER V8.18   PASS1                                                                 09/06/2014 22:11:03 PAGE 6   
+
+ 304   2        lcd_cmd(0xc3);
+ 305   2        lcd("TO KEY LOCK");
+ 306   2        delay(200);
+ 307   2        lcd_cmd(0x01);              //Clear LCD screen
+ 308   2        lock_output=0;
+ 309   2        lcd_cmd(0x82);             // Set cursor on position first of first line
+ 310   2        lcd("ENTER PIN CODE"); 
+ 311   2        check=0;
+ 312   2        row1=row2=row3=row4=0;
+ 313   2        while(col1==1 && col2==1 && col3==1);
+ 314   2        for(i=0;i<4;i++)
+ 315   2        {
+ 316   3         delay(10);
+ 317   3         lcd_cmd(0xc4+i);
+ 318   3         row1=row2=row3=row4=0;
+ 319   3         while(col1==1 && col2==1 && col3==1);
+ 320   3         row1=row2=row3=row4=0;
+ 321   3         if(col1==0)
+ 322   3         check_col1();
+ 323   3         else
+ 324   3          if(col2==0)
+ 325   3          check_col2();
+ 326   3          else
+ 327   3           if(col3==0)
+ 328   3           check_col3();
+ 329   3         if(count==4)
+ 330   3         {
+ 331   4         lcd_cmd(0x01);
+ 332   4         lcd_cmd(0x86);
+ 333   4         lcd("SORRY");
+ 334   4         lcd_cmd(0xc1);
+ 335   4         lcd("NO MORE TRIALS");
+ 336   4         while(1);
+ 337   4         }
+ 338   3        }   
+ 339   2      }
+ 340   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1044    ----
+   CONSTANT SIZE    =    129    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     22       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

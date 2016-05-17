@@ -1,0 +1,72 @@
+C51 COMPILER V8.18   SWITCH_SEND                                                           08/19/2014 22:32:49 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE SWITCH_SEND
+OBJECT MODULE PLACED IN switch send.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE switch send.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          sbit sw1=P2^0;                         // switchs connecting port-2 lower pins 0,1,2
+   3          sbit sw2=P2^1;
+   4          sbit sw3=P2^2;
+   5          void Transmit(unsigned char );              // function initialization
+   6          void main()
+   7          {
+   8   1      unsigned char x;
+   9   1      unsigned char name1[ ]="Embedded systems";
+  10   1      unsigned char name2[ ]="Embedded programming";
+  11   1      unsigned char name3[ ]="Assembly programming";
+  12   1      TMOD=0x20;                                        // timer-1 mode-2
+  13   1      TH1=0xFD;                                        // preset value FD
+  14   1      SCON=0x50;                                      //Serial control 9600 baud rate selection
+  15   1      TR1=1;                                           // run timer-1
+  16   1      while(1)
+  17   1      {
+  18   2      if(sw1==0)                                    // check if switch 1 is pressed
+  19   2      {
+  20   3      for(x=0;x<=16;x++)                            // transmitting 17 characters to serial port
+  21   3      {
+  22   4      Transmit(name1[x]);
+  23   4      }
+  24   3      }
+  25   2      if(sw2==0)                                     // check if switch 2 is pressed
+  26   2      {
+  27   3      for(x=0;x<=20;x++)                              // transmitting 21 characters to the serial port
+  28   3      {
+  29   4      Transmit(name2[x]);
+  30   4      }
+  31   3      }
+  32   2      if(sw3==0)                                       // check if switch 3 is pressed
+  33   2      {
+  34   3      for(x=0;x<=20;x++)                                   // transmitting 21 characters to the serial port
+  35   3      {
+  36   4      Transmit(name3[x]);
+  37   4      }
+  38   3      }
+  39   2      }
+  40   1      }
+  41          // serial port declaration
+  42          void Transmit(unsigned char i)
+  43          {
+  44   1      SBUF=i;
+  45   1      while(TI==0);                                       // wait until serial Transmit interrupt flag  overflow
+  46   1      TI=0;
+  47   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    143    ----
+   CONSTANT SIZE    =     59    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      60
+C51 COMPILER V8.18   SWITCH_SEND                                                           08/19/2014 22:32:49 PAGE 2   
+
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

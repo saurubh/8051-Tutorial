@@ -1,0 +1,62 @@
+C51 COMPILER V8.18   7_SEG_TIMER                                                           08/20/2014 17:10:57 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE 7_SEG_TIMER
+OBJECT MODULE PLACED IN 7 seg timer.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE 7 seg timer.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          sbit sl1 = P1^0;
+   3          sbit sl2 = P1^2;
+   4          unsigned char a[10] = {0x40,0x79,0x24,0x30,0x19,0x12,0x02,0x78,0x00,0x10};
+   5          unsigned int i,z,j,k;
+   6          void display();
+   7          void init_timer();
+   8          void main()
+   9            {
+  10   1          display();
+  11   1        }
+  12          void display()
+  13          {
+  14   1        for(i=0;i<=9;i++)
+  15   1        {
+  16   2          sl1 = 1;
+  17   2        P2 = a[i];
+  18   2        init_timer();
+  19   2          sl1 = 0;
+  20   2        }
+  21   1        for(z=0;z<=9;z++)
+  22   1        {
+  23   2          sl2 = 1;
+  24   2          P2 = a[z];
+  25   2          init_timer();
+  26   2          sl2 = 0;
+  27   2        }
+  28   1      }
+  29          void init_timer()
+  30          {
+  31   1        TMOD=0x01;
+  32   1        TL0=0xfd;
+  33   1        TH0=0x4b;
+  34   1        for(j=0;j<200;j++)
+  35   1        for(k=0;k<500;k++);
+  36   1        TR0 = 1;
+  37   1        while(TF0==0);
+  38   1        TF0=0;
+  39   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    135    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     18    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

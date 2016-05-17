@@ -1,0 +1,46 @@
+C51 COMPILER V8.18   SEG_0_9_C_C                                                           08/13/2014 17:53:08 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE SEG_0_9_C_C
+OBJECT MODULE PLACED IN seg 0-9 c-c.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE seg 0-9 c-c.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          sbit sl1 = P1^0;
+   3          void msdelay(unsigned int);
+   4          void main()
+   5          {
+   6   1          int i;
+   7   1        unsigned char digit[10] = {0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f};
+   8   1        while(1)
+   9   1        {
+  10   2          for(i=0;i<10;i++)
+  11   2          {
+  12   3            sl1 = 1;
+  13   3            P2 = digit[i];
+  14   3            msdelay(100);
+  15   3          }
+  16   2        }
+  17   1      }
+  18          void msdelay(unsigned int itime)
+  19          {
+  20   1         unsigned int j,k;
+  21   1        for(j=0;j<itime;j++)
+  22   1        for(k=0;k<1275;k++);
+  23   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     94    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      12
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

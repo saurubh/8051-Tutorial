@@ -1,0 +1,4 @@
+".\hex\STARTUP.obj",
+".\hex\swlcd1.obj" 
+TO ".\hex\swlcd1" 
+PRINT(".\swlcd1.m51")

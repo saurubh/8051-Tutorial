@@ -1,0 +1,76 @@
+C51 COMPILER V8.18   PWM_TIMER                                                             08/19/2014 16:16:10 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE PWM_TIMER
+OBJECT MODULE PLACED IN pwm timer.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE pwm timer.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          void T0delay(void);
+   3          sbit Mybit=P2^0;      // output PWM port
+   4          void main(void)
+   5          {
+   6   1      unsigned char x;
+   7   1      while(1)
+   8   1      {
+   9   2      Mybit=1;
+  10   2      for(x=0;x<10;x++)     // generating 250ms delay for ON time
+  11   2      {
+  12   3      T0delay();
+  13   3      }
+  14   2      Mybit=0;
+  15   2      for(x=0;x<10;x++)  // generating 250ms delay for OFF time
+  16   2      {
+  17   3      T0delay();
+  18   3      }
+  19   2      Mybit=1;
+  20   2      for(x=0;x<5;x++)  // generating 125ms delay for ON time
+  21   2      {
+  22   3      T0delay();
+  23   3      }
+  24   2      Mybit=0;
+  25   2      for(x=0;x<5;x++)  // generating 125ms delay for OFF time
+  26   2      {
+  27   3      T0delay();
+  28   3      }
+  29   2      Mybit=1;
+  30   2      for(x=0;x<2;x++)  // generating 50ms delay for ON time
+  31   2      {
+  32   3      T0delay();
+  33   3      }
+  34   2      Mybit=0;
+  35   2      for(x=0;x<2;x++)  // generating 50ms delay for OFF time
+  36   2      {
+  37   3      T0delay();
+  38   3      }
+  39   2      }
+  40   1      }
+  41          // 25ms delay function
+  42          void T0delay(void)
+  43          {
+  44   1      TMOD=0X01; // timer-0 mode-1
+  45   1      TL0=0xFE;
+  46   1      TH0=0xA5;
+  47   1      TR0=1;
+  48   1      while(TF0==0);
+  49   1      TR0=0;
+  50   1      TF0=0;
+  51   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    123    ----
+C51 COMPILER V8.18   PWM_TIMER                                                             08/19/2014 16:16:10 PAGE 2   
+
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,90 @@
+C51 COMPILER V8.18   USER_INPUT_SEG                                                        08/22/2014 11:11:41 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE USER_INPUT_SEG
+OBJECT MODULE PLACED IN user input seg.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE user input seg.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          sbit sw1 = P1^0;
+   3          sbit sw2 = P1^1;
+   4          sbit sw3 = P1^2;
+   5          sbit sw4 = P1^3;
+   6          sbit sw5 = P1^4;
+   7          sbit sw6 = P1^5;
+   8          sbit sw7 = P1^6;
+   9          sbit sw8 = P1^7;
+  10          void msdelay(unsigned int);
+  11          void main()
+  12          {
+  13   1          int z;
+  14   1        unsigned char a[] = {0x40,0x79,0x24,0x30,0x19,0x12,0x02,0x78,0x00,0x10};
+  15   1        while(1)
+  16   1        {
+  17   2       if(sw1==0)
+  18   2       {
+  19   3         P2 = a[0];
+  20   3         msdelay(1);
+  21   3       }
+  22   2       if(sw2==0)
+  23   2       {
+  24   3         P2 = a[1];
+  25   3         msdelay(1);
+  26   3       }
+  27   2       if(sw3==0)
+  28   2       {
+  29   3         P2 = a[2];
+  30   3         msdelay(1);
+  31   3       }
+  32   2       if(sw4==0)
+  33   2       {
+  34   3         P2 = a[3];
+  35   3         msdelay(1);
+  36   3       }
+  37   2       if(sw5==0)
+  38   2       {
+  39   3         P2 = a[4];
+  40   3         msdelay(1);
+  41   3       }
+  42   2       if(sw6==0)
+  43   2       {
+  44   3         P2 = a[5];
+  45   3         msdelay(1);
+  46   3       }
+  47   2       if(sw7==0)
+  48   2       {
+  49   3         P2 = a[6];
+  50   3         msdelay(1);
+  51   3       }
+  52   2       if(sw8==0)
+  53   2       {
+  54   3         P2 = a[7];
+  55   3         msdelay(1);
+C51 COMPILER V8.18   USER_INPUT_SEG                                                        08/22/2014 11:11:41 PAGE 2   
+
+  56   3       }
+  57   2       }
+  58   1        }
+*** WARNING C280 IN LINE 13 OF USER INPUT SEG.C: 'z': unreferenced local variable
+  59          void msdelay(unsigned int itime)
+  60          {
+  61   1        unsigned int i,j;
+  62   1        for(i=0;i<itime;i++)
+  63   1        for(j=0;j<1275;j++);
+  64   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    129    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      12
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

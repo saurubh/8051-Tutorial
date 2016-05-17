@@ -1,0 +1,55 @@
+C51 COMPILER V8.18   SERIAL_TO_PARALLER_CNVRT                                              08/22/2014 00:39:53 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE SERIAL_TO_PARALLER_CNVRT
+OBJECT MODULE PLACED IN serial to paraller cnvrt.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE serial to paraller cnvrt.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          sbit clk = P2^0; 
+   3          sbit din = P2^1;
+   4          
+   5          code char seg[]={ 0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F,0x00,0x00,0x00,0x00,0x76,0x79,0x38,0x3
+             -8,0x3F,0x3F,0x00,0x00};
+   6          void delay(unsigned int itime)
+   7          {
+   8   1      unsigned int z,k;
+   9   1      for(z=0;z<itime;z++)
+  10   1      for(k=0;k<1275;k++);
+  11   1      }
+  12          
+  13          void main()
+  14          {
+  15   1      char j,i,dat;
+  16   1      while(1)
+  17   1      {
+  18   2      for(i=0;i<21;i++)
+  19   2      {
+  20   3      dat = seg[i];
+  21   3      
+  22   3      for(j=0;j<8;j++)
+  23   3      {
+  24   4      din = (dat&(0x80>>j));
+  25   4      clk = 0;
+  26   4      clk = 1;
+  27   4      } 
+  28   3      delay(100);
+  29   3      }
+  30   2      }
+  31   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    110    ----
+   CONSTANT SIZE    =     22    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,115 @@
+BL51 BANKED LINKER/LOCATER V6.20                                                        08/15/2014  23:55:58  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.20, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE seg up down.obj TO seg up down
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  seg up down.obj (SEG_UP_DOWN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?COPY)
+
+
+LINK MAP OF MODULE:  seg up down (SEG_UP_DOWN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0018H     UNIT         _DATA_GROUP_
+            IDATA   0020H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     00F6H     UNIT         ?C?LIB_CODE
+            CODE    08F6H     007EH     UNIT         ?PR?MAIN?SEG_UP_DOWN
+            CODE    0974H     0014H     UNIT         ?CO?SEG_UP_DOWN
+            CODE    0988H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   seg up down (SEG_UP_DOWN)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?SEG_UP_DOWN
+
+?PR?MAIN?SEG_UP_DOWN           0008H    0018H
+  +--> ?CO?SEG_UP_DOWN
+
+
+
+SYMBOL TABLE OF MODULE:  seg up down (SEG_UP_DOWN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        SEG_UP_DOWN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  C:08F6H         PUBLIC        main
+BL51 BANKED LINKER/LOCATER V6.20                                                      08/15/2014  23:55:58  PAGE 2
+
+
+  B:0090H.1       PUBLIC        down
+  C:0974H         SYMBOL        _?ix1000
+  C:097EH         SYMBOL        _?ix1001
+  B:0090H.0       PUBLIC        up
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        i
+  D:000AH         SYMBOL        j
+  D:000CH         SYMBOL        arra1
+  D:0016H         SYMBOL        arra2
+  -------         ENDDO         
+  C:08F6H         LINE#         4
+  C:08F6H         LINE#         5
+  C:08F6H         LINE#         7
+  C:08FBH         LINE#         8
+  C:08FFH         LINE#         9
+  C:0910H         LINE#         10
+  C:0923H         LINE#         11
+  C:0923H         LINE#         12
+  C:0923H         LINE#         13
+  C:0926H         LINE#         14
+  C:0926H         LINE#         15
+  C:092EH         LINE#         16
+  C:0939H         LINE#         17
+  C:0939H         LINE#         18
+  C:093EH         LINE#         19
+  C:093EH         LINE#         20
+  C:0946H         LINE#         21
+  C:0949H         LINE#         22
+  C:0949H         LINE#         23
+  C:094CH         LINE#         24
+  C:094CH         LINE#         25
+  C:0954H         LINE#         26
+  C:0961H         LINE#         27
+  C:0961H         LINE#         28
+  C:0967H         LINE#         29
+  C:0967H         LINE#         30
+  C:096FH         LINE#         31
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        SEG_UP_DOWN
+
+  -------         MODULE        ?C?COPY
+  C:08D0H         PUBLIC        ?C?COPY
+  -------         ENDMOD        ?C?COPY
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0092H BYTE ( 7%) *
+******************************************************************************
+
+Program Size: data=33.0 xdata=0 code=407
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

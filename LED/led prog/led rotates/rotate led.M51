@@ -1,0 +1,109 @@
+BL51 BANKED LINKER/LOCATER V6.20                                                        09/09/2014  14:57:48  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.20, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE rotate led.obj TO rotate led
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  rotate led.obj (ROTATE_LED)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  rotate led (ROTATE_LED)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         _DATA_GROUP_
+            IDATA   000AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0051H     UNIT         ?PR?MAIN?ROTATE_LED
+            CODE    0851H     0029H     UNIT         ?PR?_MSDELAY?ROTATE_LED
+            CODE    087AH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   rotate led (ROTATE_LED)
+
+
+SEGMENT                           DATA_GROUP 
+  +--> CALLED SEGMENT           START    LENGTH
+-----------------------------------------------
+?C_C51STARTUP                   -----    -----
+  +--> ?PR?MAIN?ROTATE_LED
+
+?PR?MAIN?ROTATE_LED             0008H    0002H
+  +--> ?PR?_MSDELAY?ROTATE_LED
+
+
+
+SYMBOL TABLE OF MODULE:  rotate led (ROTATE_LED)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ROTATE_LED
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  C:0800H         PUBLIC        main
+  C:085AH         PUBLIC        _msdelay
+  -------         PROC          MAIN
+  -------         DO            
+BL51 BANKED LINKER/LOCATER V6.20                                                      09/09/2014  14:57:48  PAGE 2
+
+
+  D:0008H         SYMBOL        i
+  -------         ENDDO         
+  C:0800H         LINE#         3
+  C:0800H         LINE#         4
+  C:0800H         LINE#         6
+  C:0800H         LINE#         7
+  C:0800H         LINE#         8
+  C:0811H         LINE#         9
+  C:0811H         LINE#         10
+  C:0811H         LINE#         11
+  C:0814H         LINE#         12
+  C:081CH         LINE#         13
+  C:081CH         LINE#         15
+  C:0824H         LINE#         16
+  C:0824H         LINE#         17
+  C:0834H         LINE#         18
+  C:0834H         LINE#         19
+  C:0834H         LINE#         20
+  C:0837H         LINE#         22
+  C:0844H         LINE#         23
+  C:0844H         LINE#         24
+  C:0844H         LINE#         25
+  -------         ENDPROC       MAIN
+  -------         PROC          L?0021
+  -------         ENDPROC       L?0021
+  -------         PROC          _MSDELAY
+  D:0006H         SYMBOL        itime
+  -------         DO            
+  D:0004H         SYMBOL        k
+  D:0002H         SYMBOL        j
+  -------         ENDDO         
+  C:085AH         LINE#         29
+  C:085AH         LINE#         30
+  C:085AH         LINE#         32
+  C:0864H         LINE#         33
+  C:0879H         LINE#         34
+  -------         ENDPROC       _MSDELAY
+  -------         ENDMOD        ROTATE_LED
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 007AH BYTE ( 5%) *
+******************************************************************************
+
+Program Size: data=11.0 xdata=0 code=137
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

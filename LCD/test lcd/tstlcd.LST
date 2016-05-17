@@ -1,0 +1,122 @@
+C51 COMPILER V8.18   TSTLCD                                                                08/24/2014 16:31:35 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE TSTLCD
+OBJECT MODULE PLACED IN .\hex\tstlcd.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE tstlcd.c BROWSE DEBUG OBJECTEXTEND TABS(2) OBJECT(.\hex\tstlcd.obj)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          sfr lcd_data_pin=0xA0;  // data port P2
+   3          sbit rs=P3^0; // Register select pin
+   4          sbit rw=P3^1; // Read write pin
+   5          sbit en=P3^2; // Enable pin
+   6          sbit led1 = P1^0;
+   7          sbit led2 = P1^1;
+   8          sbit sw1 = P3^6;
+   9          sbit sw2 = P3^7;
+  10          void delay(unsigned int msec)    //delay function
+  11          {
+  12   1      int i,j;
+  13   1      for(i=0;i<msec;i++)
+  14   1      for(j=0;j<1275;j++);
+  15   1      }
+  16          void lcd_command(unsigned char comm) // function to send command to LCD
+  17          {
+  18   1      lcd_data_pin=comm;
+  19   1      en=1;
+  20   1      rs=0;
+  21   1      rw=0;
+  22   1      delay(1);
+  23   1      en=0;
+  24   1      }
+  25          void lcd_data(unsigned char disp)    // function to send data on LCD
+  26          {
+  27   1      lcd_data_pin=disp;
+  28   1      en=1;
+  29   1      rs=1;
+  30   1      rw=0;
+  31   1      delay(1);
+  32   1      en=0;
+  33   1      }
+  34          
+  35          lcd_dataa(unsigned char *disp)    // function to send string to LCD
+  36          {
+  37   1      int x;
+  38   1      for(x=0;disp[x]!=0;x++)
+  39   1      {
+  40   2      lcd_data(disp[x]);
+  41   2      
+  42   2      }
+  43   1      }
+  44          
+  45          void lcd_ini()     //Function to inisialize the LCD
+  46          {
+  47   1      lcd_command(0x38);   
+  48   1      delay(5);
+  49   1      lcd_command(0x0c);       
+  50   1      delay(5);
+  51   1      lcd_command(0x80);
+  52   1      delay(5);
+  53   1      lcd_command(0x06);
+  54   1      delay(5);     
+  55   1      
+C51 COMPILER V8.18   TSTLCD                                                                08/24/2014 16:31:35 PAGE 2   
+
+  56   1      }
+  57          void main()
+  58          {
+  59   1        while(1)
+  60   1        {
+  61   2          led1=0;
+  62   2          led2=0;
+  63   2      lcd_ini();
+  64   2      lcd_command(0x01);
+  65   2      while(sw1==1&&sw2==1);
+  66   2        if(sw1==0&&sw2==1)
+  67   2        {
+  68   3          led1=1;
+  69   3          led2=0;
+  70   3      lcd_dataa("LED 1 IS GLOW");
+  71   3      lcd_command(0xc0);
+  72   3      lcd_dataa(" LED 2 IS OFF"); 
+  73   3      while(sw1==0);
+  74   3        }
+  75   2        else
+  76   2          led1=led2=0;
+  77   2      lcd_command(0x01);
+  78   2        
+  79   2        
+  80   2        if(sw2==0&&sw1==1)
+  81   2        {
+  82   3          led1=0;
+  83   3          led2=1;
+  84   3      lcd_command(0x01);
+  85   3      lcd_command(0x82);  
+  86   3      lcd_dataa("LED 2 IS GLOW");
+  87   3      lcd_command(0xc2);
+  88   3      lcd_dataa("LED 1 IS OFF");
+  89   3      while(sw2==0);
+  90   3        }
+  91   2          else
+  92   2            led1=led2=0;
+  93   2      lcd_dataa(0x01);
+  94   2        
+  95   2      }
+  96   1        }
+*** WARNING C290 IN LINE 43 OF TSTLCD.C: missing return value
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    272    ----
+   CONSTANT SIZE    =     55    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

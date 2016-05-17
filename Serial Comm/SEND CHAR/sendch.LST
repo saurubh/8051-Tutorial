@@ -1,0 +1,44 @@
+C51 COMPILER V8.18   SENDCH                                                                08/19/2014 22:21:59 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE SENDCH
+OBJECT MODULE PLACED IN sendch.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE sendch.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          void sertx(unsigned char);
+   3          void main()
+   4          {
+   5   1         TMOD = 0x20;
+   6   1         TH1 = 0xFD;
+   7   1         SCON = 0x50;
+   8   1        TR1 = 1;
+   9   1        while(1)
+  10   1        {
+  11   2          sertx('y');
+  12   2          sertx('e');
+  13   2          sertx('s');
+  14   2        }
+  15   1      }
+  16          void sertx(unsigned char x)
+  17          {
+  18   1         SBUF = x;
+  19   1          while(TI==0);
+  20   1          TI=0;
+  21   1        }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     36    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

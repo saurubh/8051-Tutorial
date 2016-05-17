@@ -1,0 +1,43 @@
+C51 COMPILER V8.18   TEST                                                                  09/09/2014 14:43:04 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE TEST
+OBJECT MODULE PLACED IN test.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE test.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          void msdelay(unsigned int);
+   3          void main()
+   4          {
+   5   1        unsigned int i;
+   6   1        while(1)
+   7   1        {
+   8   2          for(i=0x01;i<=0x80;i<<=1)
+   9   2          P2 =~i;
+  10   2          msdelay(50);
+  11   2      
+  12   2      
+  13   2          }
+  14   1        }
+  15               void msdelay(unsigned int itime)
+  16               {
+  17   1              unsigned int k,j;
+  18   1             for(k=0;k<itime;k++)
+  19   1             for(j=0;j<1275;j++);
+  20   1           }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     67    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

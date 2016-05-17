@@ -1,0 +1,36 @@
+C51 COMPILER V8.18   LED                                                                   08/18/2014 23:14:02 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE LED
+OBJECT MODULE PLACED IN led.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE led.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          void main()
+   3          {
+   4   1         unsigned char mynum[] = {+1,-1,+2,-2,+3,-3,+4,-4};
+   5   1         unsigned char z;
+   6   1         for(z=0;z<=8;z++)
+   7   1         {
+   8   2           while(1)
+   9   2           {
+  10   3             P2 = mynum[z];
+  11   3           }
+  12   2         }
+  13   1       }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     37    ----
+   CONSTANT SIZE    =      8    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

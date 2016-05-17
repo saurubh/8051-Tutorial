@@ -1,0 +1,74 @@
+C51 COMPILER V8.18   7_SEGCNT                                                              08/21/2014 09:26:14 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE 7_SEGCNT
+OBJECT MODULE PLACED IN 7 segcnt.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE 7 segcnt.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          sbit sel1 = P3^2;
+   3          sbit sel2 = P3^3;
+   4          sbit sw1 = P3^6;
+   5          sbit sw2 = P3^7;
+   6          
+   7          unsigned char a[]= {0x40,0x79,0x24,0x30,0x19,0x12,0x02,0x78,0x00,0x10};
+   8          void delay(unsigned int itime)
+   9          {
+  10   1      unsigned int j,k;
+  11   1      for(j=0;j<itime;j++)
+  12   1      for(k=0;k<1275;k++);
+  13   1      }
+  14          void display(int i)
+  15          {
+  16   1      P2 = a[i/10];
+  17   1      sel1 = 1;
+  18   1      delay(1);
+  19   1      sel1 = 0;
+  20   1      
+  21   1      P2 = a[i%10];
+  22   1      sel2 = 1;
+  23   1      delay(1);
+  24   1      sel2 = 0;
+  25   1      }
+  26          
+  27          void main()
+  28          {
+  29   1      int i=0;
+  30   1      
+  31   1      while(1)
+  32   1      {
+  33   2      display(i);
+  34   2      
+  35   2      if(sw1 == 0)
+  36   2      {
+  37   3      i++;
+  38   3      while(sw1==0)
+  39   3      display(i);
+  40   3      }
+  41   2      if(sw2 == 0)
+  42   2      {
+  43   3      i--;
+  44   3      while(sw2==0)
+  45   3      display(i); 
+  46   3      }
+  47   2      
+  48   2      } 
+  49   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    132    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+C51 COMPILER V8.18   7_SEGCNT                                                              08/21/2014 09:26:14 PAGE 2   
+
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     10       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,293 @@
+BL51 BANKED LINKER/LOCATER V5.03                                                        06/17/2005  11:21:29  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V5.03, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE KayanYazý.obj TO KayanYazý RTX51 RAMSIZE (256)
+
+
+MEMORY MODEL: LARGE
+
+
+INPUT MODULES INCLUDED:
+  KayanYazý.obj (KAYANYAZý)
+  C:\KEIL\C51\LIB\C51L.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51L.LIB (?C?IMUL)
+  C:\KEIL\C51\LIB\C51L.LIB (?C?SIDIV)
+  C:\KEIL\C51\LIB\C51L.LIB (?C?IILDX)
+  C:\KEIL\C51\LIB\C51L.LIB (?C?OFFXADD)
+  C:\KEIL\C51\LIB\C51L.LIB (?C_INIT)
+  C:\KEIL\C51\LIB\C51L.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  KayanYazý (KAYANYAZý)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *  X D A T A   M E M O R Y  * * * * * * *
+            XDATA   0000H     0302H     UNIT         ?XD?KAYANYAZý
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     039AH     UNIT         ?PR?TUSOKU?KAYANYAZý
+            CODE    039DH     0258H     UNIT         ?CO?KAYANYAZý
+            CODE    05F5H     0236H     UNIT         ?PR?KAYDIR?KAYANYAZý
+            CODE    082BH     0198H     UNIT         ?PR?GOSTER?KAYANYAZý
+            CODE    09C3H     0118H     UNIT         ?PR?TEKBDIZI?KAYANYAZý
+            CODE    0ADBH     00BFH     UNIT         ?C?LIB_CODE
+            CODE    0B9AH     00B7H     UNIT         ?PR?YAZIAL?KAYANYAZý
+            CODE    0C51H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0CDDH     0063H     UNIT         ?C_INITSEG
+            CODE    0D40H     0029H     UNIT         ?PR?MAIN?KAYANYAZý
+
+
+
+OVERLAY MAP OF MODULE:   KayanYazý (KAYANYAZý)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?KAYANYAZý
+  +--> ?C_INITSEG
+
+?PR?MAIN?KAYANYAZý
+  +--> ?PR?TUSOKU?KAYANYAZý
+BL51 BANKED LINKER/LOCATER V5.03                                                      06/17/2005  11:21:29  PAGE 2
+
+
+  +--> ?PR?YAZIAL?KAYANYAZý
+  +--> ?PR?GOSTER?KAYANYAZý
+  +--> ?PR?TEKBDIZI?KAYANYAZý
+  +--> ?PR?KAYDIR?KAYANYAZý
+
+?PR?YAZIAL?KAYANYAZý
+  +--> ?CO?KAYANYAZý
+
+
+
+SYMBOL TABLE OF MODULE:  KayanYazý (KAYANYAZý)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        KAYANYAZý
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  X:0000H         PUBLIC        esasyaz
+  X:01E0H         PUBLIC        bekle
+  X:01E2H         PUBLIC        satirelemani
+  C:05F5H         PUBLIC        kaydir
+  X:01E4H         PUBLIC        satelm
+  X:01E6H         PUBLIC        tekrar
+  C:0B9AH         PUBLIC        yazial
+  D:00A8H         PUBLIC        IE
+  B:00A0H.0       PUBLIC        P2_0
+  B:00B0H.0       PUBLIC        P3_0
+  B:00A0H.1       PUBLIC        P2_1
+  B:00B0H.1       PUBLIC        P3_1
+  B:00A0H.2       PUBLIC        P2_2
+  B:00B0H.2       PUBLIC        P3_2
+  B:00A0H.3       PUBLIC        P2_3
+  B:00B0H.3       PUBLIC        P3_3
+  B:00A0H.4       PUBLIC        P2_4
+  B:00B0H.4       PUBLIC        P3_4
+  B:00A0H.5       PUBLIC        P2_5
+  C:082BH         PUBLIC        goster
+  B:00A0H.6       PUBLIC        P2_6
+  C:039DH         PUBLIC        karakterler
+  X:01FAH         PUBLIC        enter
+  D:00D8H         PUBLIC        CCON
+  C:0D40H         PUBLIC        main
+  X:01FCH         PUBLIC        dizidekikarakter
+  C:0003H         PUBLIC        tusoku
+  X:01FEH         PUBLIC        bak
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  X:0200H         PUBLIC        krkt
+  X:0202H         PUBLIC        kar
+  X:0204H         PUBLIC        gecsatirtarama
+  C:09C3H         PUBLIC        tekbdizi
+  X:0206H         PUBLIC        tus
+  D:00B8H         PUBLIC        IPL
+BL51 BANKED LINKER/LOCATER V5.03                                                      06/17/2005  11:21:29  PAGE 3
+
+
+  D:00C8H         PUBLIC        T2CON
+  X:0208H         PUBLIC        sifirla
+  X:020AH         PUBLIC        karaktersayisi
+  X:020CH         PUBLIC        yazmayitekraret
+  X:020EH         PUBLIC        yazilacakdizi
+  X:02FEH         PUBLIC        satirsay
+  X:0300H         PUBLIC        sifirmi
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          TUSOKU
+  C:0003H         LINE#         118
+  C:0003H         LINE#         120
+  C:0005H         LINE#         121
+  C:000BH         LINE#         122
+  C:000BH         LINE#         123
+  C:0057H         LINE#         125
+  C:00A4H         LINE#         127
+  C:00F1H         LINE#         128
+  C:00F3H         LINE#         129
+  C:00F6H         LINE#         130
+  C:00F8H         LINE#         131
+  C:00FEH         LINE#         132
+  C:00FEH         LINE#         133
+  C:014BH         LINE#         135
+  C:0198H         LINE#         137
+  C:01E5H         LINE#         138
+  C:01E7H         LINE#         139
+  C:01EAH         LINE#         140
+  C:01ECH         LINE#         141
+  C:01F2H         LINE#         142
+  C:01F2H         LINE#         143
+  C:023FH         LINE#         145
+  C:028CH         LINE#         147
+  C:02D9H         LINE#         148
+  C:02DBH         LINE#         149
+  C:02DEH         LINE#         150
+  C:02E0H         LINE#         151
+  C:02E6H         LINE#         152
+  C:02E6H         LINE#         153
+  C:02E9H         LINE#         154
+  C:02F7H         LINE#         155
+  C:02FEH         LINE#         156
+  C:0301H         LINE#         157
+  C:031AH         LINE#         158
+  C:033FH         LINE#         159
+  C:033FH         LINE#         161
+  C:038AH         LINE#         163
+  C:0397H         LINE#         164
+  C:0399H         LINE#         165
+  C:039CH         LINE#         166
+  -------         ENDPROC       TUSOKU
+  -------         PROC          YAZIAL
+  C:0B9AH         LINE#         169
+  C:0B9AH         LINE#         171
+  C:0BA1H         LINE#         172
+  C:0C50H         LINE#         174
+  -------         ENDPROC       YAZIAL
+  -------         PROC          GOSTER
+BL51 BANKED LINKER/LOCATER V5.03                                                      06/17/2005  11:21:29  PAGE 4
+
+
+  C:082BH         LINE#         177
+  C:082BH         LINE#         179
+  C:0832H         LINE#         180
+  C:0839H         LINE#         181
+  C:0839H         LINE#         182
+  C:083BH         LINE#         183
+  C:083DH         LINE#         185
+  C:086DH         LINE#         186
+  C:086DH         LINE#         187
+  C:08AEH         LINE#         188
+  C:08B0H         LINE#         189
+  C:08B2H         LINE#         190
+  C:08C2H         LINE#         192
+  C:08C8H         LINE#         194
+  C:08E9H         LINE#         196
+  C:08ECH         LINE#         197
+  C:08FDH         LINE#         199
+  C:0909H         LINE#         200
+  C:090CH         LINE#         201
+  C:090CH         LINE#         202
+  C:090FH         LINE#         203
+  C:0966H         LINE#         205
+  C:097EH         LINE#         206
+  C:0985H         LINE#         207
+  C:0985H         LINE#         208
+  C:09BFH         LINE#         209
+  C:09C2H         LINE#         210
+  -------         ENDPROC       GOSTER
+  -------         PROC          TEKBDIZI
+  C:09C3H         LINE#         213
+  C:09C3H         LINE#         216
+  C:09EAH         LINE#         217
+  C:0A03H         LINE#         218
+  C:0A88H         LINE#         220
+  C:0ADAH         LINE#         221
+  -------         ENDPROC       TEKBDIZI
+  -------         PROC          KAYDIR
+  C:05F5H         LINE#         224
+  C:05F5H         LINE#         226
+  C:05F5H         LINE#         227
+  C:05F5H         LINE#         228
+  C:0625H         LINE#         230
+  C:062CH         LINE#         231
+  C:0633H         LINE#         232
+  C:0633H         LINE#         233
+  C:0635H         LINE#         234
+  C:0637H         LINE#         236
+  C:0650H         LINE#         237
+  C:0650H         LINE#         238
+  C:0684H         LINE#         239
+  C:0686H         LINE#         240
+  C:0688H         LINE#         241
+  C:0698H         LINE#         243
+  C:069EH         LINE#         245
+  C:06BFH         LINE#         247
+  C:06C2H         LINE#         248
+  C:06D3H         LINE#         250
+BL51 BANKED LINKER/LOCATER V5.03                                                      06/17/2005  11:21:29  PAGE 5
+
+
+  C:06DFH         LINE#         251
+  C:06E5H         LINE#         252
+  C:06E5H         LINE#         253
+  C:06E8H         LINE#         254
+  C:0726H         LINE#         255
+  C:072DH         LINE#         256
+  C:079EH         LINE#         257
+  C:07DCH         LINE#         258
+  C:07DEH         LINE#         259
+  C:07E0H         LINE#         260
+  C:07E0H         LINE#         261
+  -------         ENDPROC       KAYDIR
+  -------         PROC          MAIN
+  C:0D40H         LINE#         266
+  C:0D40H         LINE#         268
+  C:0D42H         LINE#         269
+  C:0D4CH         LINE#         270
+  C:0D4CH         LINE#         271
+  C:0D58H         LINE#         272
+  C:0D5BH         LINE#         273
+  C:0D5EH         LINE#         274
+  C:0D61H         LINE#         275
+  C:0D63H         LINE#         276
+  C:0D66H         LINE#         277
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        KAYANYAZý
+
+  -------         MODULE        ?C?IMUL
+  C:0ADBH         PUBLIC        ?C?IMUL
+  -------         ENDMOD        ?C?IMUL
+
+  -------         MODULE        ?C?SIDIV
+  C:0AEDH         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
+
+  -------         MODULE        ?C?IILDX
+  C:0B23H         PUBLIC        ?C?IILDX
+  -------         ENDMOD        ?C?IILDX
+
+  -------         MODULE        ?C?OFFXADD
+  C:0B39H         PUBLIC        ?C?OFFXADD
+  -------         ENDMOD        ?C?OFFXADD
+
+  -------         MODULE        ?C?UIDIV
+  C:0B45H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+Program Size: data=9.0 xdata=770 code=3433
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

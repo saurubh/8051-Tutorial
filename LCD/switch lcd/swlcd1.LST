@@ -1,0 +1,96 @@
+C51 COMPILER V8.18   SWLCD1                                                                08/25/2014 22:29:06 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE SWLCD1
+OBJECT MODULE PLACED IN .\hex\swlcd1.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE swlcd1.c BROWSE DEBUG OBJECTEXTEND TABS(2) OBJECT(.\hex\swlcd1.obj)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          sfr ldata=0x90;
+   3          sbit rs=P2^0;
+   4          sbit rw=P2^1;
+   5          sbit en=P2^2;
+   6          sbit sw1=P3^0;
+   7          sbit sw2=P3^1;
+   8          sbit sw3=P3^2;
+   9          void Tdelay(unsigned int );
+  10          void lcdcmd(unsigned char );
+  11          void lcd_data(unsigned char );
+  12          void lcd_init(void);
+  13          void lcd_display(unsigned char *c );
+  14          int main( )
+  15          {
+  16   1      while(1){
+  17   2      lcd_init( );
+  18   2      if (sw1==0)
+  19   2      lcd_display("Embedded Systems");
+  20   2      if (sw2==0)
+  21   2      lcd_display("Electronics");
+  22   2      if(sw3==0)
+  23   2      lcd_display("Embedded programming");
+  24   2      }
+  25   1      }
+  26          void Tdelay(unsigned int ms)
+  27          {
+  28   1      unsigned int i,j;
+  29   1      for(i=0;i<ms;i++)
+  30   1      for(j=0;j<1275;j++);
+  31   1      }
+  32          void lcd_init( void)
+  33          {
+  34   1      lcdcmd(0x38);
+  35   1      Tdelay(25);
+  36   1      lcdcmd(0x0F);      //display on , cursor blinking
+  37   1      Tdelay(25);
+  38   1      lcdcmd(0x06);       //  cursor increment
+  39   1      Tdelay(25);
+  40   1      lcdcmd(0x80);        // start at row-1
+  41   1      Tdelay(25);
+  42   1      lcdcmd(0x01);        // clear screen
+  43   1      Tdelay(10);
+  44   1      }
+  45          void lcdcmd(unsigned char cvalue )   // lcd in command mode
+  46          {
+  47   1      ldata=cvalue;
+  48   1      rs=0;
+  49   1      rw=0;
+  50   1      en=1;
+  51   1      Tdelay(1);
+  52   1      en=0;
+  53   1      }
+  54          void lcd_display(unsigned char *dvalue)
+  55          {
+C51 COMPILER V8.18   SWLCD1                                                                08/25/2014 22:29:06 PAGE 2   
+
+  56   1      unsigned int x;
+  57   1      for(x=0;dvalue[x]!=0;x++)
+  58   1      {
+  59   2      lcd_data(dvalue[x]);
+  60   2      Tdelay(10);
+  61   2      }
+  62   1      }
+  63          void lcd_data(unsigned char dvalue)       // lcd in data mode
+  64          {
+  65   1      ldata=dvalue;
+  66   1      rs=1;
+  67   1      rw=0;
+  68   1      en=1;
+  69   1      Tdelay(1);
+  70   1      en=0;
+  71   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    207    ----
+   CONSTANT SIZE    =     50    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

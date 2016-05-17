@@ -1,0 +1,92 @@
+BL51 BANKED LINKER/LOCATER V6.20                                                        08/17/2014  17:29:37  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.20, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE led toggle.obj TO led toggle
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  led toggle.obj (LED_TOGGLE)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  led toggle (LED_TOGGLE)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0020H     UNIT         ?PR?_MSDELAY?LED_TOGGLE
+            CODE    0820H     0016H     UNIT         ?PR?MAIN?LED_TOGGLE
+            CODE    0836H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   led toggle (LED_TOGGLE)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?LED_TOGGLE
+
+?PR?MAIN?LED_TOGGLE
+  +--> ?PR?_MSDELAY?LED_TOGGLE
+
+
+
+SYMBOL TABLE OF MODULE:  led toggle (LED_TOGGLE)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        LED_TOGGLE
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  C:0820H         PUBLIC        main
+  C:0800H         PUBLIC        _msdelay
+  -------         PROC          MAIN
+  C:0820H         LINE#         3
+  C:0820H         LINE#         4
+BL51 BANKED LINKER/LOCATER V6.20                                                      08/17/2014  17:29:37  PAGE 2
+
+
+  C:0820H         LINE#         5
+  C:0820H         LINE#         6
+  C:0820H         LINE#         8
+  C:0823H         LINE#         9
+  C:082AH         LINE#         10
+  C:082DH         LINE#         11
+  C:0834H         LINE#         12
+  -------         ENDPROC       MAIN
+  -------         PROC          _MSDELAY
+  D:0006H         SYMBOL        itime
+  -------         DO            
+  D:0004H         SYMBOL        i
+  D:0002H         SYMBOL        j
+  -------         ENDDO         
+  C:0800H         LINE#         14
+  C:0800H         LINE#         15
+  C:0800H         LINE#         17
+  C:080AH         LINE#         18
+  C:081FH         LINE#         19
+  -------         ENDPROC       _MSDELAY
+  -------         ENDMOD        LED_TOGGLE
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0036H BYTE ( 2%) *
+******************************************************************************
+
+Program Size: data=9.0 xdata=0 code=69
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

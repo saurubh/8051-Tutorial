@@ -1,0 +1,4 @@
+".\hex\STARTUP.obj",
+".\hex\lcdclk.obj" 
+TO ".\hex\lcdclk" 
+PRINT(".\lcdclk.m51")

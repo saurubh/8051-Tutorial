@@ -1,0 +1,117 @@
+C51 COMPILER V8.18   SEG_0000_9999_CNT                                                     08/21/2014 12:13:05 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE SEG_0000_9999_CNT
+OBJECT MODULE PLACED IN seg 0000-9999 cnt.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE seg 0000-9999 cnt.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          sbit sl1 = P1^0;
+   3          sbit sl2 = P1^1;
+   4          sbit sl3 = P1^2;
+   5          sbit sl4 = P1^3;
+   6          sbit sw1 = P1^5;
+   7          sbit sw2 = P1^6;
+   8          unsigned int digit1,digit2,digit3,digit4,num,test=0;
+   9          unsigned char digi_disp = 0;
+  10          unsigned char a[10] = {0x40,0x79,0x24,0x30,0x19,0x12,0x02,0x78,0x00,0x10};
+  11          void delay(unsigned int itime)
+  12          {
+  13   1        unsigned int i,j;
+  14   1        for(i=0;i<itime;i++)
+  15   1        for(j=0;j<1275;j++);
+  16   1      }
+  17          
+  18          void display(int num)
+  19          {
+  20   1        P2=0xff;
+  21   1        sl1=sl2=sl3=sl4 = 0;
+  22   1        digi_disp++;
+  23   1        digi_disp = digi_disp%4;
+  24   1        switch(digi_disp)
+  25   1      {
+  26   2       
+  27   2        case 0:
+  28   2        P2= a[digit4];
+  29   2        sl1 = 1;
+  30   2        delay(1);
+  31   2        sl1 = 0;
+  32   2        break;
+  33   2      
+  34   2        case 1:
+  35   2        P2= a[digit3];
+  36   2        sl2 = 1;
+  37   2        delay(1);
+  38   2        sl2 = 0;
+  39   2        break;
+  40   2      
+  41   2        case 2:
+  42   2        P2= a[digit2];
+  43   2        sl3 = 1;
+  44   2        delay(1);
+  45   2        sl3 = 0;
+  46   2        break;
+  47   2       
+  48   2        case 3:
+  49   2        P2= a[digit1];
+  50   2        sl4 = 1;
+  51   2        delay(1);
+  52   2        sl4 = 0;
+  53   2        break;
+  54   2      }
+  55   1      }
+C51 COMPILER V8.18   SEG_0000_9999_CNT                                                     08/21/2014 12:13:05 PAGE 2   
+
+*** WARNING C280 IN LINE 18 OF SEG 0000-9999 CNT.C: 'num': unreferenced local variable
+  56          
+  57          void main()
+  58          {
+  59   1        while(1)
+  60   1        {
+  61   2        display(num);
+  62   2          {
+  63   3            if(sw1==0&&sw2==1)
+  64   3            {
+  65   4              test++;
+  66   4             num=test;
+  67   4              digit4=num%10;
+  68   4            num=num/10;
+  69   4              digit3=num%10;
+  70   4            num=num/10;
+  71   4              digit2=num%10;
+  72   4            digit1=num/10;
+  73   4            if(test==9999)
+  74   4           test=0;
+  75   4        }
+  76   3          if(sw2==0&&sw1==1)
+  77   3          {
+  78   4            test--;
+  79   4              num=test;
+  80   4              digit4=num%10;
+  81   4         num=num/10;
+  82   4              digit3=num%10;
+  83   4         num=num/10;
+  84   4              digit2=num%10;
+  85   4            digit1=num/10;
+  86   4           if(test==0)
+  87   4           test=9999;
+  88   4          }
+  89   3        }
+  90   2      }
+  91   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    381    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     23       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

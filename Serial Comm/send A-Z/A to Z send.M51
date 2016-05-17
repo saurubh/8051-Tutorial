@@ -1,0 +1,92 @@
+BL51 BANKED LINKER/LOCATER V6.20                                                        08/19/2014  23:55:49  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.20, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE A to Z send.obj TO A to Z send
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  A to Z send.obj (A_TO_Z_SEND)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  A to Z send (A_TO_Z_SEND)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0020H     UNIT         ?PR?MAIN?A_TO_Z_SEND
+            CODE    0820H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   A to Z send (A_TO_Z_SEND)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?A_TO_Z_SEND
+
+
+
+SYMBOL TABLE OF MODULE:  A to Z send (A_TO_Z_SEND)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        A_TO_Z_SEND
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  B:0098H.1       PUBLIC        TI
+  C:0800H         PUBLIC        main
+  D:0099H         PUBLIC        SBUF
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:008DH         PUBLIC        TH1
+  B:0088H.6       PUBLIC        TR1
+  -------         PROC          MAIN
+  -------         DO            
+  D:0007H         SYMBOL        z
+BL51 BANKED LINKER/LOCATER V6.20                                                      08/19/2014  23:55:49  PAGE 2
+
+
+  -------         ENDDO         
+  C:0800H         LINE#         2
+  C:0800H         LINE#         3
+  C:0800H         LINE#         5
+  C:0803H         LINE#         6
+  C:0806H         LINE#         7
+  C:0809H         LINE#         8
+  C:080BH         LINE#         9
+  C:080BH         LINE#         11
+  C:080BH         LINE#         12
+  C:080DH         LINE#         13
+  C:080DH         LINE#         14
+  C:080FH         LINE#         15
+  C:0812H         LINE#         16
+  C:0812H         LINE#         17
+  C:0815H         LINE#         18
+  C:0815H         LINE#         19
+  C:0818H         LINE#         20
+  C:081AH         LINE#         22
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        A_TO_Z_SEND
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0020H BYTE ( 1%) *
+******************************************************************************
+
+Program Size: data=9.0 xdata=0 code=47
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

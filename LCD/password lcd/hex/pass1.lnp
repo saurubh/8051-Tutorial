@@ -1,0 +1,4 @@
+".\hex\STARTUP.obj",
+".\hex\pass1.obj" 
+TO ".\hex\pass1" 
+PRINT(".\pass1.m51")

@@ -1,0 +1,138 @@
+C51 COMPILER V8.18   SEG_0000_9999                                                         08/21/2014 18:04:02 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE SEG_0000_9999
+OBJECT MODULE PLACED IN seg 0000-9999.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE seg 0000-9999.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2           sbit dig_ctrl_4=P1^0; // Control pins for the seven segments
+   3           sbit dig_ctrl_3=P1^1;
+   4           sbit dig_ctrl_2=P1^2;
+   5           sbit dig_ctrl_1=P1^3;
+   6           sbit dig_ctrl_5=P1^6;
+   7           sbit dig_ctrl_6=P1^7;
+   8           unsigned char dig_disp=0;
+   9           int hrs2;
+  10           int hrs1;   
+  11           int min2;
+  12           int min1;
+  13           int sec2;
+  14           int sec1;
+  15           char digi_val[10]={0x40,0xF9,0x24,0x30,0x19,0x12,0x02,0xF8,0x00,0x10};
+  16          
+  17          void delay()        // Function to provide time delay using Timer 1.
+  18              {
+  19   1          int i;
+  20   1          for(i=0;i<20;i++)
+  21   1          {
+  22   2              TL1=0xFD;
+  23   2               TH1=0x4B;
+  24   2               TR1=1;
+  25   2               while(TF1==0);
+  26   2               TR1=0;
+  27   2               TF1=0;
+  28   2          }
+  29   1      }
+  30             
+  31          
+  32          void display() interrupt 1        // Function to display the four digit number using multiplexing on seven
+             - segment. It uses Timer 0 interrupt to display the four digits one by one after a time delay of 2.5 milli second
+  33          {
+  34   1          TL0=0x36;
+  35   1          TH0=0xf6;
+  36   1          P2=0xFF;
+  37   1          dig_ctrl_1 = dig_ctrl_3 = dig_ctrl_2 = dig_ctrl_4 = 0;
+  38   1          dig_disp++;
+  39   1          dig_disp=dig_disp%6;
+  40   1          switch(dig_disp)
+  41   1          {
+  42   2              case 0:
+  43   2              P2=digi_val[sec1];
+  44   2              dig_ctrl_1 = 1;
+  45   2              break;
+  46   2      
+  47   2              case 1:
+  48   2              P2=    digi_val[sec2];
+  49   2              dig_ctrl_2 = 1;
+  50   2              break;
+  51   2         
+  52   2              case 2:
+  53   2              P2=    digi_val[min1];
+  54   2              dig_ctrl_3 = 1;
+C51 COMPILER V8.18   SEG_0000_9999                                                         08/21/2014 18:04:02 PAGE 2   
+
+  55   2              break;
+  56   2         
+  57   2              case 3:
+  58   2              P2=    digi_val[min2];
+  59   2              dig_ctrl_4 = 1;
+  60   2              break;
+  61   2              
+  62   2              case 4:
+  63   2              P2=    digi_val[hrs1];
+  64   2              dig_ctrl_5 = 1;
+  65   2              break;
+  66   2              
+  67   2              case 5:
+  68   2              P2=    digi_val[hrs2];
+  69   2              dig_ctrl_6 = 1;
+  70   2              break;
+  71   2                
+  72   2          }
+  73   1      }
+  74          
+  75            
+  76           
+  77          
+  78          void main()
+  79          {
+  80   1      
+  81   1          TMOD=0x01;        // Intialize Timer 0
+  82   1          TL0=0x36;
+  83   1          TH0=0xF6;
+  84   1          IE=0x82;
+  85   1          TR0=1;        //Start timer0
+  86   1          while(1)        // Forward counting
+  87   1           {
+  88   2            hrs2=hrs1=min2=min1=sec2=sec1=0;
+  89   2             for(hrs2=0;hrs2<=1;hrs2++)
+  90   2             {
+  91   3               for(hrs1=0;hrs1<=2;hrs1++)
+  92   3               {
+  93   4                for(min2=0;min2<=5;min2++)
+  94   4                {
+  95   5                     for(min1=0;min1<10;min1++)
+  96   5                     {
+  97   6                      for(sec2=0;sec2<=5;sec2++)
+  98   6                      {
+  99   7                           for(sec1=0;sec1<10;sec1++)
+ 100   7                           {
+ 101   8                          delay();
+ 102   8                          }
+ 103   7                      }
+ 104   6                     }
+ 105   5                  }
+ 106   4               }
+ 107   3            }
+ 108   2          }
+ 109   1       }
+ 110            
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    360    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+C51 COMPILER V8.18   SEG_0000_9999                                                         08/21/2014 18:04:02 PAGE 3   
+
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     23    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

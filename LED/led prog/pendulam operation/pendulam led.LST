@@ -1,0 +1,91 @@
+C51 COMPILER V8.18   PENDULAM_LED                                                          08/12/2014 13:49:46 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE PENDULAM_LED
+OBJECT MODULE PLACED IN pendulam led.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE pendulam led.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          void msdelay(unsigned int);
+   3          void main()
+   4          {
+   5   1        int i;
+   6   1        int digit[8] = {0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
+   7   1        int digit1[8] = {0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01};
+   8   1        P2 = 0x00;
+   9   1        while(1)
+  10   1          {
+  11   2            for(i=0;i<8;i++)
+  12   2          {
+  13   3              P2 = digit[i];
+  14   3              msdelay(50);
+  15   3          }
+  16   2          for(i=0;i<7;i++)
+  17   2          {
+  18   3              P2 = digit1[i];
+  19   3              msdelay(50);
+  20   3          }
+  21   2          for(i=1;i<6;i++)
+  22   2          {
+  23   3              P2 = digit[i];
+  24   3              msdelay(50);
+  25   3             }  
+  26   2        for(i=1;i<6;i++)
+  27   2          {
+  28   3              P2 = digit1[i];
+  29   3              msdelay(50);
+  30   3          } 
+  31   2          for(i=2;i<4;i++)
+  32   2          {
+  33   3              P2 = digit[i];
+  34   3              msdelay(50);
+  35   3             }    
+  36   2        for(i=2;i<3;i++)
+  37   2          {
+  38   3              P2 = digit1[i];
+  39   3              msdelay(50);
+  40   3          } 
+  41   2          for(i=3;i<4;i++)
+  42   2          {
+  43   3              P2 = digit[i];
+  44   3              msdelay(50);
+  45   3             }
+  46   2        for(i=3;i<2;i++)
+  47   2          {
+  48   3              P2 = digit1[i];
+  49   3              msdelay(50);
+  50   3          } 
+  51   2          for(i=4;i<6;i++)
+  52   2          {
+  53   3              P2 = digit[i];
+  54   3              msdelay(100);
+  55   3             }    
+C51 COMPILER V8.18   PENDULAM_LED                                                          08/12/2014 13:49:46 PAGE 2   
+
+  56   2          
+  57   2          }
+  58   1        }      
+  59          void msdelay(unsigned int itime)
+  60                {
+  61   1              unsigned int i,j;
+  62   1            for(i=0;i<itime;i++)
+  63   1            for(j=0;j<1275;j++);
+  64   1          }
+  65              
+  66            
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    388    ----
+   CONSTANT SIZE    =     32    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      34
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

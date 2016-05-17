@@ -1,0 +1,437 @@
+C51 COMPILER V8.18   VTMCN                                                                 08/24/2014 10:52:29 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE VTMCN
+OBJECT MODULE PLACED IN vtmcn.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE vtmcn.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #define msec 50
+   3          #define lcd_data_str_pin P2 
+   4          sbit rs = P3^0;  //Register select (RS) pin
+   5          sbit rw = P3^1;  //Read write(RW) pin
+   6          sbit en = P3^6;  //Enable(EN) pin
+   7          sbit ini_pin = P1^0; // Start voting pin
+   8          sbit stop_pin = P1^5; // Stop voting pin
+   9          
+  10          sbit candidate_1=P1^1;  //Candidate1
+  11          sbit candidate_2=P1^2;  //Candidate2
+  12          sbit candidate_3=P1^3;  //Candidate3
+  13          sbit candidate_4=P1^4;  //Candidate4
+  14          int max = 0;
+  15          int carry = 0;
+  16          int arr[4];
+  17          
+  18          int vote_amt[3],j;
+  19          unsigned int vote_1,vote_2,vote_3,vote_4;
+  20          
+  21          void delay(int delay_time)  // Time delay function
+  22          {
+  23   1      int j,k;
+  24   1      for(j=0;j<=delay_time;j++)
+  25   1        for(k=0;k<=1000;k++);
+  26   1      }
+  27          
+  28          void lcd_cmd(unsigned char cmd_addr)  //Function to send command to LCD
+  29          {
+  30   1      lcd_data_str_pin = cmd_addr;
+  31   1      en = 1;
+  32   1      rs = 0;
+  33   1      rw = 0;
+  34   1      delay(1);
+  35   1      en = 0;
+  36   1      return;
+  37   1      }
+  38          
+  39          void lcd_data_str(char str[50])  //Function to send string
+  40          { 
+  41   1      int p;
+  42   1      for (p=0;str[p]!='\0';p++)
+  43   1      {
+  44   2        lcd_data_str_pin = str[p];
+  45   2        rw = 0;
+  46   2        rs = 1;
+  47   2        en = 1;
+  48   2        delay(1);
+  49   2        en = 0;
+  50   2      }
+  51   1      return;
+  52   1      }
+  53          
+  54          void lcd_data_int(unsigned int vote)  //Function to send 0-9 character values
+  55          { 
+C51 COMPILER V8.18   VTMCN                                                                 08/24/2014 10:52:29 PAGE 2   
+
+  56   1      char dig_ctrl_var;
+  57   1      int p;
+  58   1      for (j=2;j>=0;j--)
+  59   1      {
+  60   2        vote_amt[j]=vote%10;
+  61   2        vote=vote/10;
+  62   2      }
+  63   1      
+  64   1      for (p=0;p<=2;p++)
+  65   1      {
+  66   2        dig_ctrl_var = vote_amt[p]+48;
+  67   2        lcd_data_str_pin = dig_ctrl_var;
+  68   2        rw = 0;
+  69   2        rs = 1;
+  70   2        en = 1;
+  71   2        delay(1);
+  72   2        en = 0;
+  73   2      }
+  74   1      return;
+  75   1      } 
+  76          
+  77          void vote_count()  // Function to count votes
+  78          {
+  79   1      while (candidate_1==0 && candidate_2==0 && candidate_3==0 && candidate_4==0);
+  80   1      if (candidate_1==1)
+  81   1      {
+  82   2        while (candidate_1 == 1);
+  83   2         {
+  84   3          vote_1 = vote_1 + 1;
+  85   3         }
+  86   2      }
+  87   1      
+  88   1      if (candidate_2==1)
+  89   1      {
+  90   2        while (candidate_2 == 1);
+  91   2         {
+  92   3          vote_2 = vote_2 + 1;
+  93   3         }
+  94   2      }
+  95   1      
+  96   1      if (candidate_3==1)
+  97   1      {
+  98   2        while (candidate_3 == 1);
+  99   2         {
+ 100   3          vote_3 = vote_3 + 1;
+ 101   3         }
+ 102   2      }
+ 103   1      
+ 104   1      if (candidate_4==1)
+ 105   1      {
+ 106   2        while (candidate_4 == 1);
+ 107   2         {
+ 108   3          vote_4 = vote_4 + 1;
+ 109   3         }
+ 110   2      }
+ 111   1      }
+ 112          
+ 113          void lcd_ini()
+ 114          {
+ 115   1          lcd_cmd(0x38);
+ 116   1      delay(msec);
+ 117   1      lcd_cmd(0x0E);
+C51 COMPILER V8.18   VTMCN                                                                 08/24/2014 10:52:29 PAGE 3   
+
+ 118   1      delay(msec);
+ 119   1      lcd_cmd(0x01);
+ 120   1      delay(msec);
+ 121   1      lcd_cmd(0x81);
+ 122   1      delay(msec);
+ 123   1      lcd_data_str("Welcome!!!");
+ 124   1      delay(100);
+ 125   1      lcd_cmd(0x01);
+ 126   1      delay(msec);
+ 127   1      lcd_cmd(0x80);
+ 128   1      delay(msec);
+ 129   1      lcd_data_str( "Press" );
+ 130   1      delay(msec);
+ 131   1      lcd_cmd(0x14);
+ 132   1      delay(msec);
+ 133   1      lcd_data_str("button");
+ 134   1      delay(msec);
+ 135   1      
+ 136   1      delay(msec);
+ 137   1      lcd_cmd(0xC0);
+ 138   1      delay(msec);
+ 139   1      lcd_data_str("to");
+ 140   1      delay(msec);
+ 141   1      lcd_cmd(0x14);
+ 142   1      delay(msec);
+ 143   1      lcd_data_str("vote");
+ 144   1      delay(100);
+ 145   1      lcd_cmd(0x01);
+ 146   1      delay(msec);
+ 147   1      lcd_cmd(0x80);
+ 148   1      delay(msec);
+ 149   1      lcd_data_str("P1");
+ 150   1      delay(msec);
+ 151   1      lcd_cmd(0x84);
+ 152   1      delay(msec);
+ 153   1      lcd_data_str("P2");
+ 154   1      delay(msec);
+ 155   1      lcd_cmd(0x88);
+ 156   1      delay(msec);
+ 157   1      lcd_data_str("P3");
+ 158   1      delay(msec);
+ 159   1      lcd_cmd(0x8C);
+ 160   1      delay(msec);
+ 161   1      lcd_data_str("P4");
+ 162   1      delay(msec);
+ 163   1      
+ 164   1      vote_count();
+ 165   1      lcd_cmd(0x01);
+ 166   1      delay(msec);
+ 167   1      lcd_cmd(0x85);
+ 168   1      delay(msec);
+ 169   1      lcd_data_str("Thank");
+ 170   1      delay(msec);
+ 171   1      lcd_cmd(0x14);
+ 172   1      delay(msec);
+ 173   1      lcd_data_str("You!!");
+ 174   1      delay(100);
+ 175   1      }
+ 176          
+ 177          void results()  // Function to show results
+ 178          {
+ 179   1      int i;
+C51 COMPILER V8.18   VTMCN                                                                 08/24/2014 10:52:29 PAGE 4   
+
+ 180   1      carry = 0;
+ 181   1      lcd_cmd(0x01);
+ 182   1      delay(msec);
+ 183   1      lcd_cmd(0x80);
+ 184   1      delay(msec);
+ 185   1      lcd_data_str("Results");
+ 186   1      delay(msec);
+ 187   1      lcd_cmd(0x14);
+ 188   1      delay(msec);
+ 189   1      lcd_data_str("Are");
+ 190   1      delay(msec);
+ 191   1      lcd_cmd(0x14);
+ 192   1      delay(msec);
+ 193   1      lcd_data_str("Out");
+ 194   1      delay(msec);
+ 195   1      
+ 196   1        lcd_cmd(0x01);
+ 197   1      delay(msec);
+ 198   1      lcd_cmd(0x80);
+ 199   1      delay(msec);
+ 200   1      lcd_data_str("P1");
+ 201   1      delay(msec);
+ 202   1      lcd_cmd(0x84);
+ 203   1      delay(msec);
+ 204   1      lcd_data_str("P2");
+ 205   1      delay(msec);
+ 206   1      lcd_cmd(0x88);
+ 207   1      delay(msec);
+ 208   1      lcd_data_str("P3");
+ 209   1      delay(msec);
+ 210   1      lcd_cmd(0x8C);
+ 211   1      delay(msec);
+ 212   1      lcd_data_str("P4");
+ 213   1      delay(msec);
+ 214   1      
+ 215   1      lcd_cmd(0xC0);
+ 216   1      delay(100);
+ 217   1      lcd_data_int(vote_1);
+ 218   1      delay(msec);
+ 219   1      
+ 220   1      lcd_cmd(0xC4);
+ 221   1      delay(msec);
+ 222   1      lcd_data_int(vote_2);
+ 223   1      delay(msec);
+ 224   1      
+ 225   1      lcd_cmd(0xC8);
+ 226   1      delay(msec);
+ 227   1      lcd_data_int(vote_3);
+ 228   1      delay(msec);
+ 229   1      
+ 230   1      lcd_cmd(0xCC);
+ 231   1      delay(msec);
+ 232   1      lcd_data_int(vote_4);
+ 233   1      delay(300);
+ 234   1      
+ 235   1      arr[0] = vote_1;
+ 236   1      arr[1] = vote_2;
+ 237   1      arr[2] = vote_3;
+ 238   1      arr[3] = vote_4;
+ 239   1      
+ 240   1      for( i=0; i<4; i++)
+ 241   1      {
+C51 COMPILER V8.18   VTMCN                                                                 08/24/2014 10:52:29 PAGE 5   
+
+ 242   2        if(arr[i]>=max)
+ 243   2        max = arr[i];
+ 244   2      }
+ 245   1      
+ 246   1      if ( (vote_1 == max) && ( vote_2 != max) && (vote_3 != max)&& (vote_4 != max) )
+ 247   1      {
+ 248   2        carry = 1;
+ 249   2        lcd_cmd(0x01);
+ 250   2        delay(msec);
+ 251   2        lcd_cmd(0x82);
+ 252   2        delay(msec);
+ 253   2        lcd_data_str("Hurray!!!");
+ 254   2        delay(50);
+ 255   2        lcd_cmd(0xC4);
+ 256   2        delay(msec);
+ 257   2        lcd_data_str("P1");
+ 258   2        delay(msec);
+ 259   2        lcd_cmd(0x14);
+ 260   2        delay(msec);
+ 261   2        lcd_data_str("wins");
+ 262   2        delay(msec);
+ 263   2      }
+ 264   1      
+ 265   1      if ( (vote_2 == max) && ( vote_1 != max) && (vote_3 != max)&& (vote_4 != max) )
+ 266   1      {
+ 267   2        carry = 1;
+ 268   2        lcd_cmd(0x01);
+ 269   2        delay(msec);
+ 270   2        lcd_cmd(0x82);
+ 271   2        delay(msec);
+ 272   2        lcd_data_str("Hurray!!!");
+ 273   2        delay(50);
+ 274   2        lcd_cmd(0xC4);
+ 275   2        delay(msec);
+ 276   2        lcd_data_str("P2");
+ 277   2        delay(msec);
+ 278   2        lcd_cmd(0x14);
+ 279   2        delay(msec);
+ 280   2        lcd_data_str("wins");
+ 281   2        delay(msec);
+ 282   2      }
+ 283   1      
+ 284   1      if ( (vote_3 == max) && ( vote_2 != max) && (vote_1 != max)&& (vote_4 != max) )
+ 285   1      {
+ 286   2        carry = 1;
+ 287   2        lcd_cmd(0x01);
+ 288   2        delay(msec);
+ 289   2        lcd_cmd(0x82);
+ 290   2        delay(msec);
+ 291   2        lcd_data_str("Hurray!!!");
+ 292   2        delay(50);
+ 293   2        lcd_cmd(0xC4);
+ 294   2        delay(msec);
+ 295   2        lcd_data_str("P3");
+ 296   2        delay(msec);
+ 297   2        lcd_cmd(0x14);
+ 298   2        delay(msec);
+ 299   2        lcd_data_str("wins");
+ 300   2        delay(msec);
+ 301   2      }
+ 302   1      
+ 303   1      if ( (vote_4 == max) && ( vote_2 != max) && (vote_3 != max)&& (vote_1 != max) )
+C51 COMPILER V8.18   VTMCN                                                                 08/24/2014 10:52:29 PAGE 6   
+
+ 304   1      {
+ 305   2        carry = 1;
+ 306   2        lcd_cmd(0x01);
+ 307   2        delay(msec);
+ 308   2        lcd_cmd(0x82);
+ 309   2        delay(msec);
+ 310   2        lcd_data_str("Hurray!!!");
+ 311   2        delay(50);
+ 312   2        lcd_cmd(0xC4);
+ 313   2        delay(msec);
+ 314   2        lcd_data_str("P4");
+ 315   2        delay(msec);
+ 316   2        lcd_cmd(0x14);
+ 317   2        delay(msec);
+ 318   2        lcd_data_str("wins");
+ 319   2        delay(msec);
+ 320   2      }
+ 321   1      
+ 322   1      if (carry==0)
+ 323   1      {
+ 324   2        lcd_cmd(0x01);
+ 325   2        delay(msec);
+ 326   2        lcd_cmd(0x82);
+ 327   2        delay(msec);
+ 328   2        lcd_data_str("clash");
+ 329   2        delay(50);
+ 330   2        lcd_cmd(0x14);
+ 331   2        delay(msec);
+ 332   2        lcd_data_str("between!!!");
+ 333   2        delay(50);
+ 334   2        if(vote_2 == max)
+ 335   2        {
+ 336   3         lcd_cmd(0xC5);
+ 337   3         lcd_data_str("P2");
+ 338   3         delay(50);
+ 339   3        }
+ 340   2        if(vote_3 == max)
+ 341   2        {
+ 342   3         lcd_cmd(0xC9);
+ 343   3         lcd_data_str("P3");
+ 344   3         delay(50);
+ 345   3        }
+ 346   2        if(vote_4 == max)
+ 347   2        {
+ 348   3         lcd_cmd(0xCD);
+ 349   3         lcd_data_str("P4");
+ 350   3         delay(50);
+ 351   3        }
+ 352   2      }
+ 353   1      }
+ 354          
+ 355          void main()
+ 356          {
+ 357   1      ini_pin = stop_pin = 1;
+ 358   1      vote_1 = vote_2 = vote_3 = vote_4 = 0;
+ 359   1      candidate_1 = candidate_2 = candidate_3 = candidate_4 = 0;
+ 360   1      lcd_cmd(0x38);
+ 361   1      delay(msec);
+ 362   1      lcd_cmd(0x0E);
+ 363   1      delay(msec);
+ 364   1      lcd_cmd(0x01);
+ 365   1      delay(msec);
+C51 COMPILER V8.18   VTMCN                                                                 08/24/2014 10:52:29 PAGE 7   
+
+ 366   1      lcd_cmd(0x80);
+ 367   1      delay(msec);
+ 368   1      lcd_data_str( "Press" );
+ 369   1      delay(msec);
+ 370   1      lcd_cmd(0x14);
+ 371   1      delay(msec);
+ 372   1      lcd_data_str("init");
+ 373   1      delay(msec);
+ 374   1      
+ 375   1      delay(msec);
+ 376   1      lcd_cmd(0xC0);
+ 377   1      delay(msec);
+ 378   1      lcd_data_str("to");
+ 379   1      delay(msec);
+ 380   1      lcd_cmd(0x14);
+ 381   1      delay(msec);
+ 382   1      lcd_data_str("begin");
+ 383   1      delay(100);
+ 384   1      while(1)
+ 385   1      {
+ 386   2        while(ini_pin != 0)
+ 387   2        {
+ 388   3         if (stop_pin == 0)
+ 389   3         break;
+ 390   3        }
+ 391   2        if (stop_pin == 0)
+ 392   2        {
+ 393   3        break;
+ 394   3        }
+ 395   2        lcd_ini();
+ 396   2      }
+ 397   1      
+ 398   1      while(1)
+ 399   1      {
+ 400   2      results();
+ 401   2      }
+ 402   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1440    ----
+   CONSTANT SIZE    =    115    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     28       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

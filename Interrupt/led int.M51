@@ -1,0 +1,134 @@
+BL51 BANKED LINKER/LOCATER V6.20                                                        08/20/2014  14:49:46  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.20, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE STARTUP.obj, led int.obj TO led int
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  led int.obj (LED_INT)
+
+
+LINK MAP OF MODULE:  led int (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     07F2H                  *** GAP ***
+            CODE    0800H     001EH     UNIT         ?PR?TIMER?LED_INT
+            CODE    081EH     0010H     UNIT         ?PR?MAIN?LED_INT
+            CODE    082EH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   led int (?C_STARTUP)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?LED_INT
+
+
+
+SYMBOL TABLE OF MODULE:  led int (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:082EH         SEGMENT       ?C_C51STARTUP
+  I:0008H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+BL51 BANKED LINKER/LOCATER V6.20                                                      08/20/2014  14:49:46  PAGE 2
+
+
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0831H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:082EH         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:082EH         LINE#         133
+  C:0830H         LINE#         134
+  C:0831H         LINE#         135
+  C:0832H         LINE#         136
+  C:0834H         LINE#         185
+  C:0837H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        LED_INT
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  D:00A8H         PUBLIC        IE
+  C:0800H         PUBLIC        timer
+  C:081EH         PUBLIC        main
+  D:0089H         PUBLIC        TMOD
+  B:00A0H.0       PUBLIC        led
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  -------         PROC          TIMER
+  -------         DO            
+  D:0007H         SYMBOL        x
+  -------         ENDDO         
+  C:0800H         LINE#         3
+  C:0809H         LINE#         6
+  C:080BH         LINE#         7
+  C:080DH         LINE#         8
+  C:080DH         LINE#         9
+  C:0810H         LINE#         10
+  C:0813H         LINE#         11
+  C:0817H         LINE#         12
+  -------         ENDPROC       TIMER
+  -------         PROC          MAIN
+  C:081EH         LINE#         13
+  C:081EH         LINE#         14
+  C:081EH         LINE#         15
+  C:0821H         LINE#         16
+  C:0824H         LINE#         17
+  C:0827H         LINE#         18
+  C:082AH         LINE#         19
+BL51 BANKED LINKER/LOCATER V6.20                                                      08/20/2014  14:49:46  PAGE 3
+
+
+  C:082CH         LINE#         20
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        LED_INT
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0040H BYTE ( 3%) *
+******************************************************************************
+
+Program Size: data=9.0 xdata=0 code=64
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

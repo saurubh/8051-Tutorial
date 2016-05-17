@@ -1,0 +1,90 @@
+C51 COMPILER V8.18   SENDCMD                                                               08/30/2014 22:51:12 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE SENDCMD
+OBJECT MODULE PLACED IN sendcmd.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE sendcmd.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          sfr ldata =0xA0;  // data port P2
+   3          sbit rs=P3^0; // Register select pin
+   4          sbit rw=P3^1; // Read write pin
+   5          sbit en=P3^2; // Enable pin
+   6          void delay(unsigned int msec)    //delay function
+   7          {
+   8   1      int i,j;
+   9   1      for(i=0;i<msec;i++)
+  10   1      for(j=0;j<1275;j++);
+  11   1      }
+  12          void lcd_command(unsigned char cvalue)    // function to send command to LCD
+  13          {
+  14   1      ldata=cvalue;
+  15   1      en=1;
+  16   1      rs=0;
+  17   1      rw=0;
+  18   1      delay(1);
+  19   1      en=0;
+  20   1      }
+  21          void lcd_data(unsigned char dvalue)    // function to send data on LCD
+  22          {
+  23   1      ldata=dvalue;
+  24   1      en=1;
+  25   1      rs=1;
+  26   1      rw=0;
+  27   1      delay(1);
+  28   1      en=0;
+  29   1      }
+  30          
+  31          lcd_display(unsigned char *dvalue)    // function to send string to LCD
+  32          {
+  33   1      int x;
+  34   1      for(x=0;dvalue[x]!=0;x++)
+  35   1      {
+  36   2      lcd_data(dvalue[x]);
+  37   2      
+  38   2      }
+  39   1      }
+  40          
+  41          void lcd_init()     //Function to inisialize the LCD
+  42          {
+  43   1      lcd_command(0x38);   
+  44   1      delay(1);
+  45   1      lcd_command(0x0c);       
+  46   1      delay(1);
+  47   1      lcd_command(0x83);
+  48   1      delay(1);
+  49   1      lcd_command(0x06);  
+  50   1      delay(1); 
+  51   1      }
+  52          void main()
+  53          {
+  54   1      lcd_init();
+  55   1      lcd_command(0x01);  
+C51 COMPILER V8.18   SENDCMD                                                               08/30/2014 22:51:12 PAGE 2   
+
+  56   1      lcd_display("***WELCOME***");
+  57   1      delay(100);
+  58   1      lcd_command(0x01);  
+  59   1      lcd_command(0x82);
+  60   1      lcd_display("**HAPPY**");
+  61   1      lcd_command(0xc2);
+  62   1      lcd_display("*BIRTH DAY");  
+  63   1      delay(100);
+  64   1      }
+*** WARNING C290 IN LINE 39 OF SENDCMD.C: missing return value
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    201    ----
+   CONSTANT SIZE    =     35    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

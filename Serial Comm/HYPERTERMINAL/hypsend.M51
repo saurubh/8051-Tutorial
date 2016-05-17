@@ -1,0 +1,99 @@
+BL51 BANKED LINKER/LOCATER V6.20                                                        08/29/2014  08:26:31  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.20, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE hypsend.obj TO hypsend RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  hypsend.obj (HYPSEND)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  hypsend (HYPSEND)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0026H     UNIT         ?PR?MAIN?HYPSEND
+            CODE    0826H     000CH     UNIT         ?C_C51STARTUP
+            CODE    0832H     0008H     UNIT         ?PR?_TX_CHAR?HYPSEND
+
+
+
+OVERLAY MAP OF MODULE:   hypsend (HYPSEND)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?HYPSEND
+
+?PR?MAIN?HYPSEND
+  +--> ?PR?_TX_CHAR?HYPSEND
+
+
+
+SYMBOL TABLE OF MODULE:  hypsend (HYPSEND)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        HYPSEND
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  B:0098H.1       PUBLIC        TI
+  C:0800H         PUBLIC        main
+  D:0099H         PUBLIC        SBUF
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  C:0832H         PUBLIC        _Tx_char
+BL51 BANKED LINKER/LOCATER V6.20                                                      08/29/2014  08:26:31  PAGE 2
+
+
+  D:008DH         PUBLIC        TH1
+  B:0088H.6       PUBLIC        TR1
+  -------         PROC          MAIN
+  C:0800H         LINE#         3
+  C:0800H         LINE#         4
+  C:0800H         LINE#         5
+  C:0803H         LINE#         6
+  C:0806H         LINE#         7
+  C:0809H         LINE#         8
+  C:080BH         LINE#         9
+  C:080BH         LINE#         10
+  C:080BH         LINE#         11
+  C:0810H         LINE#         12
+  C:0815H         LINE#         13
+  C:081AH         LINE#         14
+  C:081FH         LINE#         15
+  C:0824H         LINE#         16
+  -------         ENDPROC       MAIN
+  -------         PROC          _TX_CHAR
+  D:0007H         SYMBOL        x
+  C:0832H         LINE#         18
+  C:0832H         LINE#         19
+  C:0832H         LINE#         20
+  C:0834H         LINE#         21
+  C:0837H         LINE#         22
+  C:0839H         LINE#         23
+  -------         ENDPROC       _TX_CHAR
+  -------         ENDMOD        HYPSEND
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 002EH BYTE ( 2%) *
+******************************************************************************
+
+Program Size: data=9.0 xdata=0 code=61
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

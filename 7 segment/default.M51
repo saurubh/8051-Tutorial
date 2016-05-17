@@ -1,0 +1,179 @@
+BL51 BANKED LINKER/LOCATER V6.20                                                        08/13/2014  12:38:55  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.20, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE default.obj TO default
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  default.obj (DEFAULT)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?SIDIV)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?SLCMP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  default (DEFAULT)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0008H     UNIT         ?DT?DEFAULT
+            DATA    0010H     0004H     UNIT         _DATA_GROUP_
+            IDATA   0014H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     00A1H     UNIT         ?C?LIB_CODE
+            CODE    08A1H     008CH     UNIT         ?C_C51STARTUP
+            CODE    092DH     007CH     UNIT         ?PR?MAIN?DEFAULT
+            CODE    09A9H     0056H     UNIT         ?PR?_DISPLAY_DIGIT?DEFAULT
+            CODE    09FFH     003AH     UNIT         ?PR?DELAY?DEFAULT
+            CODE    0A39H     000DH     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   default (DEFAULT)
+
+
+SEGMENT                              DATA_GROUP 
+  +--> CALLED SEGMENT              START    LENGTH
+--------------------------------------------------
+?C_C51STARTUP                      -----    -----
+  +--> ?PR?MAIN?DEFAULT
+  +--> ?C_INITSEG
+
+?PR?MAIN?DEFAULT                   -----    -----
+  +--> ?PR?_DISPLAY_DIGIT?DEFAULT
+  +--> ?PR?DELAY?DEFAULT
+
+?PR?DELAY?DEFAULT                  0010H    0004H
+
+
+
+BL51 BANKED LINKER/LOCATER V6.20                                                      08/13/2014  12:38:55  PAGE 2
+
+
+SYMBOL TABLE OF MODULE:  default (DEFAULT)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        DEFAULT
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  C:09FFH         PUBLIC        delay
+  C:092DH         PUBLIC        main
+  D:0008H         PUBLIC        ones
+  D:000AH         PUBLIC        tens
+  D:000CH         PUBLIC        hundreds
+  D:000EH         PUBLIC        l
+  C:09A9H         PUBLIC        _display_digit
+  B:0090H.1       PUBLIC        seg1
+  B:0090H.2       PUBLIC        seg2
+  B:0090H.3       PUBLIC        seg3
+  -------         PROC          MAIN
+  C:092DH         LINE#         10
+  C:092DH         LINE#         11
+  C:092DH         LINE#         12
+  C:0933H         LINE#         13
+  C:0940H         LINE#         14
+  C:0940H         LINE#         15
+  C:094FH         LINE#         16
+  C:0965H         LINE#         17
+  C:0974H         LINE#         18
+  C:097BH         LINE#         19
+  C:097DH         LINE#         20
+  C:0980H         LINE#         21
+  C:0982H         LINE#         23
+  C:0989H         LINE#         24
+  C:098BH         LINE#         25
+  C:098EH         LINE#         26
+  C:0990H         LINE#         28
+  C:0997H         LINE#         29
+  C:0999H         LINE#         30
+  C:099CH         LINE#         31
+  C:099EH         LINE#         32
+  C:09A6H         LINE#         33
+  C:09A8H         LINE#         34
+  -------         ENDPROC       MAIN
+  -------         PROC          DELAY
+  -------         DO            
+  D:0010H         SYMBOL        k
+  -------         ENDDO         
+  C:09FFH         LINE#         36
+  C:09FFH         LINE#         37
+  C:09FFH         LINE#         39
+  C:0A38H         LINE#         40
+  -------         ENDPROC       DELAY
+  -------         PROC          _DISPLAY_DIGIT
+  D:0006H         SYMBOL        c
+  C:09A9H         LINE#         41
+  C:09A9H         LINE#         42
+BL51 BANKED LINKER/LOCATER V6.20                                                      08/13/2014  12:38:55  PAGE 3
+
+
+  C:09A9H         LINE#         43
+  C:09D7H         LINE#         44
+  C:09D7H         LINE#         45
+  C:09D7H         LINE#         46
+  C:09DAH         LINE#         47
+  C:09DBH         LINE#         48
+  C:09DBH         LINE#         49
+  C:09DEH         LINE#         50
+  C:09DFH         LINE#         51
+  C:09DFH         LINE#         52
+  C:09E2H         LINE#         53
+  C:09E3H         LINE#         54
+  C:09E3H         LINE#         55
+  C:09E6H         LINE#         56
+  C:09E7H         LINE#         57
+  C:09E7H         LINE#         58
+  C:09EAH         LINE#         59
+  C:09EBH         LINE#         60
+  C:09EBH         LINE#         61
+  C:09EEH         LINE#         62
+  C:09EFH         LINE#         63
+  C:09EFH         LINE#         64
+  C:09F2H         LINE#         65
+  C:09F3H         LINE#         66
+  C:09F3H         LINE#         67
+  C:09F6H         LINE#         68
+  C:09F7H         LINE#         69
+  C:09F7H         LINE#         70
+  C:09FAH         LINE#         71
+  C:09FBH         LINE#         72
+  C:09FBH         LINE#         73
+  C:09FEH         LINE#         74
+  C:09FEH         LINE#         75
+  C:09FEH         LINE#         76
+  -------         ENDPROC       _DISPLAY_DIGIT
+  -------         ENDMOD        DEFAULT
+
+  -------         MODULE        ?C?SIDIV
+  C:0800H         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
+
+  -------         MODULE        ?C?SLCMP
+  C:0836H         PUBLIC        ?C?SLCMP
+  -------         ENDMOD        ?C?SLCMP
+
+  -------         MODULE        ?C?UIDIV
+  C:084CH         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0118H BYTE (13%) *
+******************************************************************************
+
+Program Size: data=21.0 xdata=0 code=585
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

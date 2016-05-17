@@ -1,0 +1,57 @@
+C51 COMPILER V8.18   SEG_UP_DOWN                                                           08/15/2014 23:55:58 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE SEG_UP_DOWN
+OBJECT MODULE PLACED IN seg up down.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE seg up down.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          sbit  up = P1^0;
+   3          sbit down = P1^1;
+   4          void main()
+   5          {
+   6   1         
+   7   1        int i=0;
+   8   1        int j=0;
+   9   1        unsigned char arra1[10] = {0x40,0x79,0x24,0x30,0x19,0x12,0x02,0x78,0x00,0x10};
+  10   1        unsigned char arra2[10] = {0x40,0x79,0x24,0x30,0x19,0x12,0x02,0x78,0x00,0x10};
+  11   1        while(1)
+  12   1        {
+  13   2          if(up==0)
+  14   2          {
+  15   3            i++;
+  16   3            if(i>9)
+  17   3            {
+  18   4              i=0;
+  19   4            }
+  20   3            P2 = arra1[i];
+  21   3            while(up==0);
+  22   3             }
+  23   2          if(down==0)
+  24   2          {
+  25   3            j--;
+  26   3            if(j>9)
+  27   3            {
+  28   4              j=i;
+  29   4            }
+  30   3            P2 = arra2[j];
+  31   3            while(down==0);
+  32   3           }
+  33   2         }
+  34   1       }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    126    ----
+   CONSTANT SIZE    =     20    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      24
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

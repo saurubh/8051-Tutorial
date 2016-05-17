@@ -1,0 +1,55 @@
+C51 COMPILER V8.18   MAX1                                                                  08/31/2014 12:52:12 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE MAX1
+OBJECT MODULE PLACED IN max1.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE max1.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          # include<reg51.h>
+   2          unsigned char col[]= {0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80}, 
+   3          
+   4           row[] = {0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+   5                    0x03,0xed,0xee,0xee,0xee,0xed,0x03,0xff,
+   6                    0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+   7                    0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff};        // 1
+   8          
+   9          void delay(unsigned int itime)
+  10          {
+  11   1      unsigned int n,m;
+  12   1        for(n=0;n<itime;n++)
+  13   1        for(m=0;m<125;m++);
+  14   1      }
+  15          
+  16          void main()
+  17          {
+  18   1      int i,j,k;
+  19   1      while(1)
+  20   1      {
+  21   2      for(j=0;j<16;j++)
+  22   2      for(k=0;k<30;k++)
+  23   2      for(i=0;i<8;i++)
+  24   2      {
+  25   3      P3 = col[i];
+  26   3      P2 = row[j+i];
+  27   3      delay(1);
+  28   3        P3 = 0x00;
+  29   3      //delay(5); 
+  30   3      }
+  31   2      }
+  32   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    124    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     40       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

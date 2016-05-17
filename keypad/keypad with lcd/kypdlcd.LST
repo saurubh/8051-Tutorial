@@ -1,0 +1,220 @@
+C51 COMPILER V8.18   KYPDLCD                                                               08/25/2014 00:12:37 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE KYPDLCD
+OBJECT MODULE PLACED IN .\hex\kypdlcd.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE kypdlcd.c BROWSE DEBUG OBJECTEXTEND TABS(2) OBJECT(.\hex\kypdlcd.obj)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #define port P3
+   3          #define dataport P2  // Dataport for lcd
+   4          #define key P1  // Port for keypad
+   5          #define sec 100
+   6          sbit rs = port^1;
+   7          sbit rw = port^2;
+   8          sbit en = port^3;
+   9          
+  10          sbit col1=key^4;
+  11          sbit col2=key^5;
+  12          sbit col3=key^6;
+  13          sbit row1=key^0;
+  14          sbit row2=key^1;
+  15          sbit row3=key^2;
+  16          sbit row4=key^3;
+  17          
+  18          void delay(unsigned int msec) //Time delay function
+  19          {
+  20   1      int i,j ;
+  21   1      for(i=0;i<msec;i++)
+  22   1        for(j=0;j<1275;j++);
+  23   1      }
+  24          
+  25          void lcd_cmd(unsigned char item) //Function to send command to LCD
+  26          {
+  27   1      dataport = item;
+  28   1      rs= 0;
+  29   1      rw=0;
+  30   1      en=1;
+  31   1      delay(1);
+  32   1      en=0;
+  33   1      return;
+  34   1      }
+  35          
+  36          void lcd_data(unsigned char item) //Funtion to send data on LCD
+  37          {
+  38   1      dataport = item;
+  39   1      rs= 1;
+  40   1      rw=0;
+  41   1      en=1;
+  42   1      delay(1);
+  43   1      en=0;
+  44   1      return;
+  45   1      }
+  46          
+  47          void lcd_data_string(unsigned char *str) // Function to send string on LCD
+  48          {
+  49   1      int i=0;
+  50   1      while(str[i]!='\0')
+  51   1      {
+  52   2        lcd_data(str[i]);
+  53   2        i++;
+  54   2        delay(10);
+  55   2      }
+C51 COMPILER V8.18   KYPDLCD                                                               08/25/2014 00:12:37 PAGE 2   
+
+  56   1      return;
+  57   1      }
+  58          
+  59          void lcd(unsigned char str[10])  // Funtion to Initialize LCD
+  60          {
+  61   1      lcd_cmd(0x38);
+  62   1      lcd_cmd(0x0e);
+  63   1      //delay(sec);
+  64   1      lcd_cmd(0x01);
+  65   1      //delay(sec);
+  66   1      lcd_cmd(0x82);
+  67   1      //delay(sec);
+  68   1      lcd_data_string(str);
+  69   1      }
+  70          
+  71          void display(int a) //Display functon for LCD
+  72          
+  73          {
+  74   1      switch(a)
+  75   1      {
+  76   2        case 1:
+  77   2          lcd("one 1");
+  78   2          break;
+  79   2        case 2:
+  80   2          lcd("two 2");
+  81   2          break;
+  82   2        case 3:
+  83   2          lcd("three 3");
+  84   2          break;
+  85   2        case 4:lcd("four 4");
+  86   2          break;
+  87   2        case 5:
+  88   2          lcd("five 5");
+  89   2          break;
+  90   2        case 6:
+  91   2          lcd("six 6");
+  92   2          break;
+  93   2        case 7:
+  94   2          lcd("seven 7");
+  95   2          break;
+  96   2        case 8:
+  97   2          lcd("EIGHT 8");
+  98   2          break;
+  99   2        case 9:
+ 100   2          lcd("NINE 9");
+ 101   2          break;
+ 102   2        case 0:
+ 103   2          lcd("ZERO 0");
+ 104   2          break;
+ 105   2        case 11:lcd("*");
+ 106   2          break;
+ 107   2        case 12:
+ 108   2          lcd("#");
+ 109   2          break;
+ 110   2      }
+ 111   1      }
+ 112          
+ 113          void check_col1() //Function for checking column one
+ 114          {
+ 115   1      row1=row2=row3=row4=1;
+ 116   1      row1=0;
+ 117   1      if(col1==0)
+C51 COMPILER V8.18   KYPDLCD                                                               08/25/2014 00:12:37 PAGE 3   
+
+ 118   1      display(1);
+ 119   1      row1=1;
+ 120   1      row2=0;
+ 121   1      if(col1==0)
+ 122   1      display(4);
+ 123   1      row2=1;
+ 124   1      row3=0;
+ 125   1      if(col1==0)
+ 126   1      display(7);
+ 127   1      row3=1;
+ 128   1      row4=0;
+ 129   1      if(col1==0)
+ 130   1      display(11); 
+ 131   1      row4=1;
+ 132   1      }
+ 133          
+ 134          void check_col2() //Function for checking column two
+ 135          {
+ 136   1      row1=row2=row3=row4=1;
+ 137   1      row1=0;
+ 138   1      if(col2==0)
+ 139   1      display(2);
+ 140   1      row1=1;
+ 141   1      row2=0;
+ 142   1      if(col2==0)
+ 143   1      display(5);
+ 144   1      row2=1;
+ 145   1      row3=0;
+ 146   1      if(col2==0)
+ 147   1      display(8);
+ 148   1      row3=1;
+ 149   1      row4=0;
+ 150   1      if(col2==0)
+ 151   1      display(0);
+ 152   1      row4=1;
+ 153   1      }
+ 154          
+ 155          void check_col3() //Function for checking column three
+ 156          {
+ 157   1      row1=row2=row3=row4=1;
+ 158   1      row1=0;
+ 159   1      if(col3==0)
+ 160   1      display(3);
+ 161   1      row1=1;
+ 162   1      row2=0;
+ 163   1      if(col3==0)
+ 164   1      display(6);
+ 165   1      row2=1;
+ 166   1      row3=0;
+ 167   1      if(col3==0)
+ 168   1      display(9);
+ 169   1      row3=1;
+ 170   1      row4=0;
+ 171   1      if(col3==0)
+ 172   1      display(12);  //For #
+ 173   1      row4=1;
+ 174   1      }
+ 175          
+ 176          void main()
+ 177          {
+ 178   1      col1=col2=col3=1;  //Input Port
+ 179   1      while(1)
+C51 COMPILER V8.18   KYPDLCD                                                               08/25/2014 00:12:37 PAGE 4   
+
+ 180   1      {
+ 181   2        row1=row2=row3=row4=0;
+ 182   2        if(col1==0)
+ 183   2        check_col1();
+ 184   2        else
+ 185   2         if(col2==0)
+ 186   2         check_col2();
+ 187   2         else
+ 188   2          if(col3==0)
+ 189   2          check_col3();
+ 190   2      }
+ 191   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    536    ----
+   CONSTANT SIZE    =     74    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

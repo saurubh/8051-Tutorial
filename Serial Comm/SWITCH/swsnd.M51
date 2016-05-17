@@ -1,0 +1,117 @@
+BL51 BANKED LINKER/LOCATER V6.20                                                        08/24/2014  15:10:44  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.20, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE swsnd.obj TO swsnd
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  swsnd.obj (SWSND)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?COPY)
+
+
+LINK MAP OF MODULE:  swsnd (SWSND)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     000BH     UNIT         _DATA_GROUP_
+            IDATA   0013H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     00F6H     UNIT         ?C?LIB_CODE
+            CODE    08F6H     0064H     UNIT         ?PR?MAIN?SWSND
+            CODE    095AH     000CH     UNIT         ?C_C51STARTUP
+            CODE    0966H     000AH     UNIT         ?CO?SWSND
+
+
+
+OVERLAY MAP OF MODULE:   swsnd (SWSND)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?SWSND
+
+?PR?MAIN?SWSND                 0008H    000BH
+  +--> ?CO?SWSND
+
+
+
+SYMBOL TABLE OF MODULE:  swsnd (SWSND)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        SWSND
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  B:0098H.1       PUBLIC        TI
+  C:08F6H         PUBLIC        main
+BL51 BANKED LINKER/LOCATER V6.20                                                      08/24/2014  15:10:44  PAGE 2
+
+
+  D:0099H         PUBLIC        SBUF
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  C:0966H         SYMBOL        _?ix1000
+  C:096AH         SYMBOL        _?ix1001
+  D:008DH         PUBLIC        TH1
+  B:0088H.6       PUBLIC        TR1
+  B:00A0H.0       PUBLIC        sw
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        z
+  D:0009H         SYMBOL        fname
+  D:000DH         SYMBOL        lname
+  -------         ENDDO         
+  C:08F6H         LINE#         3
+  C:08F6H         LINE#         4
+  C:08F6H         LINE#         6
+  C:0909H         LINE#         7
+  C:091CH         LINE#         8
+  C:091FH         LINE#         9
+  C:0922H         LINE#         10
+  C:0925H         LINE#         11
+  C:0927H         LINE#         12
+  C:092AH         LINE#         13
+  C:092AH         LINE#         14
+  C:092DH         LINE#         15
+  C:092DH         LINE#         16
+  C:0935H         LINE#         17
+  C:0938H         LINE#         18
+  C:093AH         LINE#         19
+  C:0942H         LINE#         20
+  C:0942H         LINE#         22
+  C:0942H         LINE#         23
+  C:0945H         LINE#         24
+  C:0945H         LINE#         25
+  C:094DH         LINE#         26
+  C:0950H         LINE#         27
+  C:0952H         LINE#         28
+  C:0959H         LINE#         29
+  C:0959H         LINE#         30
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        SWSND
+
+  -------         MODULE        ?C?COPY
+  C:08D0H         PUBLIC        ?C?COPY
+  -------         ENDMOD        ?C?COPY
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 006EH BYTE ( 5%) *
+******************************************************************************
+
+Program Size: data=20.0 xdata=0 code=371
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

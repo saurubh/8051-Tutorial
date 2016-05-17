@@ -1,0 +1,89 @@
+C51 COMPILER V9.53.0.0   MAX32                                                             09/09/2014 23:44:38 PAGE 1   
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE MAX32
+OBJECT MODULE PLACED IN max32.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE max32.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          void delay(unsigned int itime)
+   3          {
+   4   1        unsigned int a,b;
+   5   1        for(a=0;a<itime;a++)
+   6   1        for(b=0;b<1275;b++);
+   7   1      }
+   8          sbit SCK = P3^0;
+   9          sbit STR = P3^1;
+  10          sbit SDA = P3^2;
+  11          unsigned char col[] = {0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80},
+  12          row[] = {    0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+  13                       0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+  14                       0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+  15                       0xff,0x01,0xee,0xee,0x01,0xff,0xff,0xff,
+  16                       0xff,0xff,0x00,0x76,0x76,0x76,0x89,0xff,
+  17                       0xff,0x81,0x7e,0x7e,0x7e,0xbd,0xff,0xff,
+  18                       0xff,0xbf,0x7e,0x7e,0x80,0xfe,0xfe,0xff,
+  19                       0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+  20                       0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+  21                       0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+  22                       0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+  23          };
+  24          
+  25          void dat(unsigned char x)
+  26          {
+  27   1        unsigned char temp,i;
+  28   1        for(i=0;i<8;i++)
+  29   1        {
+  30   2          temp=x&0x80;
+  31   2          if(temp==0x80)
+  32   2          SDA=1;
+  33   2          else 
+  34   2          SDA = 0;
+  35   2          x=x*2;
+  36   2          SCK=0;
+  37   2          SCK=1;
+  38   2        }
+  39   1      }
+  40          void main()
+  41          {
+  42   1        int i,j,k;
+  43   1        while(1)
+  44   1        {
+  45   2          for(i=0;i<60;i++)
+  46   2          {
+  47   3          for(j=0;j<2;j++)
+  48   3            {
+  49   4              for(k=0;k<8;k++)
+  50   4              {
+  51   5                dat(row[i+k+24]);
+  52   5                dat(row[i+k+16]);
+  53   5                dat(row[i+k+8]);
+  54   5                dat(row[i+k]);
+  55   5                STR=0;
+C51 COMPILER V9.53.0.0   MAX32                                                             09/09/2014 23:44:38 PAGE 2   
+
+  56   5                STR=1;
+  57   5                P2 = col[k];
+  58   5                delay(1);
+  59   5                P2 = 0x00;
+  60   5              }
+  61   4            }
+  62   3          }
+  63   2        }
+  64   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    195    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     96       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

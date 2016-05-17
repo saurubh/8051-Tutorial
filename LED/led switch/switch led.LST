@@ -1,0 +1,97 @@
+C51 COMPILER V8.18   SWITCH_LED                                                            08/18/2014 17:35:38 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE SWITCH_LED
+OBJECT MODULE PLACED IN switch led.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE switch led.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include < reg51.h >
+   2          
+   3          sbit switch1=P1^0;
+   4          sbit switch2=P1^1;
+   5          sbit switch3=P1^2;
+   6          sbit switch4=P1^3;
+   7          sbit switch5=P1^4;
+   8          void delay(int);
+   9          
+  10          int i,j,l;
+  11          int n=7;
+  12          int arr[8]={0xFE,0xFD,0xFB,0xF7,0xEF,0xDF,0xBF,0x7F};
+  13          
+  14          void main()
+  15          {
+  16   1      P2=0x00;
+  17   1      P1=0xFF;
+  18   1      
+  19   1      if(switch1==0)
+  20   1      {
+  21   2      for(l=0;l<8;l++)
+  22   2      {
+  23   3      P2=arr[l];
+  24   3      delay(100);
+  25   3      }
+  26   2      }
+  27   1      
+  28   1      if(switch2==0)
+  29   1      {
+  30   2      P2=0x7E;
+  31   2      delay(100);
+  32   2      P2=0xBD;
+  33   2      delay(100);
+  34   2      P2=0xDB;
+  35   2      delay(100);
+  36   2      P2=0xE7;
+  37   2      delay(100);
+  38   2      }
+  39   1      
+  40   1      if(switch3==0)
+  41   1      {
+  42   2      P2=0xE7;
+  43   2      delay(100);
+  44   2      P2=0xDB;
+  45   2      delay(100);
+  46   2      P2=0xBD;
+  47   2      delay(100);
+  48   2      P2=0x7E;
+  49   2      delay(100);
+  50   2      }
+  51   1      
+  52   1      if(switch4==0)
+  53   1      {
+  54   2      P2=0xAA;
+  55   2      delay(50);
+C51 COMPILER V8.18   SWITCH_LED                                                            08/18/2014 17:35:38 PAGE 2   
+
+  56   2      P2=0x55;
+  57   2      delay(50);
+  58   2      }
+  59   1      
+  60   1      if(switch5==0)
+  61   1      {
+  62   2      P2=0x00;
+  63   2      delay(50);
+  64   2      P2=0xFF;
+  65   2      delay(50);
+  66   2      }
+  67   1      }
+  68          void delay(int itime) 
+  69          {
+  70   1      for(i=0;i<itime;i++)
+  71   1      for(j=0;j<1275;j++);
+  72   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    199    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     24    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

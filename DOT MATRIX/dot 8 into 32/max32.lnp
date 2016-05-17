@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"max32.obj" 
+TO "max32" 
+RAMSIZE(256) 

@@ -1,0 +1,88 @@
+C51 COMPILER V8.18   LCD1                                                                  08/25/2014 21:32:56 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE LCD1
+OBJECT MODULE PLACED IN .\hex\lcd1.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE lcd1.c BROWSE DEBUG OBJECTEXTEND TABS(2) OBJECT(.\hex\lcd1.obj)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          sfr ldata=0x90;
+   3          sbit rs=P2^0;   // LCD reset
+   4          sbit rw=P2^1;  // read/write control
+   5          sbit en=P2^2;  // LCD r/w enable
+   6          void Tdelay(unsigned int );     // functions initializaion
+   7          void lcdcmd(unsigned char );
+   8          void lcd_data(unsigned char );
+   9          void lcd_init(void);
+  10          void lcd_display(unsigned char *c );
+  11          int main( )
+  12          {
+  13   1      while(1){
+  14   2      lcd_init( );
+  15   2       lcd_display("Embedded Systems");
+  16   2      }
+  17   1      }
+  18          void Tdelay(unsigned int ms)  // providing some delay
+  19          {
+  20   1      unsigned int i,j;
+  21   1      for(i=0;i<ms;i++)
+  22   1      for(j=0;j<1275;j++);
+  23   1      }
+  24          void lcd_init( void)
+  25          {
+  26   1      lcdcmd(0x38);
+  27   1      Tdelay(25);
+  28   1      lcdcmd(0x0F);      //display on , cursor blinking
+  29   1      Tdelay(25);
+  30   1      lcdcmd(0x06);       //  cursor increment
+  31   1      Tdelay(25);
+  32   1      lcdcmd(0x80);      // start at row-1
+  33   1      Tdelay(25);
+  34   1      lcdcmd(0x01);      // clear screen
+  35   1      Tdelay(10);
+  36   1      }
+  37          void lcdcmd(unsigned char cvalue ) // LCD in command mode opearaion
+  38          {
+  39   1      ldata=cvalue;
+  40   1      rs=0;
+  41   1      rw=0;
+  42   1      en=1;
+  43   1      Tdelay(1);
+  44   1      en=0;
+  45   1      }
+  46          void lcd_display(unsigned char *dvalue)
+  47          {
+  48   1      unsigned int x;
+  49   1      for(x=0;dvalue[x]!=0;x++)
+  50   1      {
+  51   2      lcd_data(dvalue[x]);
+  52   2      Tdelay(10);
+  53   2      }
+  54   1      }
+  55          void lcd_data(unsigned char dvalue) // LCD in data mode operation
+C51 COMPILER V8.18   LCD1                                                                  08/25/2014 21:32:56 PAGE 2   
+
+  56          {
+  57   1      ldata=dvalue;
+  58   1      rs=1;
+  59   1      rw=0;
+  60   1      en=1;
+  61   1      Tdelay(1);
+  62   1      en=0;
+  63   1      }  
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    180    ----
+   CONSTANT SIZE    =     17    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

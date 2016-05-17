@@ -1,0 +1,79 @@
+C51 COMPILER V8.18   LCDCNTR                                                               08/25/2014 23:28:32 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE LCDCNTR
+OBJECT MODULE PLACED IN .\hex\lcdcntr.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE lcdcntr.c BROWSE DEBUG OBJECTEXTEND TABS(2) OBJECT(.\hex\lcdcntr.obj)
+
+line level    source
+
+   1              #include<regx51.h>
+   2              #include<stdio.h>
+   3              sbit rs=P3^5;
+   4              sbit rw=P3^6;
+   5              sbit en=P3^7;
+   6              void lcd(char a,int b);                       //subroutine for lcd display
+   7              unsigned char msg[]="Count";
+   8              char ch[4];
+   9              void delay();                                   //sub routine for delay
+  10              void counter();                              //subroutine for counters
+  11              int k;
+  12              unsigned int val;
+  13              void main()
+  14               {
+  15   1             lcd(0x38,0);
+  16   1             lcd(0x0c,0);
+  17   1             lcd(0x80,0);
+  18   1             TMOD=0x05;                              //selecting counter mode 
+  19   1             counter();                                
+  20   1           }
+  21              void delay()
+  22               {
+  23   1             int i;
+  24   1             for(i=0;i<=2000;i++);               //software delay
+  25   1           } 
+  26              void counter()
+  27               {
+  28   1             TL0=0;                                 //lodaing initial value
+  29   1             TR0=1;                               //starting timer
+  30   1             for(k=0;k<5;k++)
+  31   1               {
+  32   2                 lcd(msg[k],1);
+  33   2               }
+  34   1             while(1)
+  35   1              {
+  36   2                lcd(0x86,0);                          //setting fixed position
+  37   2                val=TL0|TH0<<8;                 //shifting the values from TL0 to TH0
+  38   2                sprintf(ch,"%u",val);            //conversion of integer to character 
+  39   2                for(k=0;k<5;k++)
+  40   2                  {
+  41   3                    lcd(ch[k],1);
+  42   3                  }
+  43   2              }
+  44   1            }
+  45               void lcd(char a,int b)
+  46                 {
+  47   1               P1=a;
+  48   1               rs=b;
+  49   1               rw=0;
+  50   1               en=1;
+  51   1               delay();
+  52   1               en=0;
+  53   1               delay();
+  54   1             }
+
+C51 COMPILER V8.18   LCDCNTR                                                               08/25/2014 23:28:32 PAGE 2   
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    185    ----
+   CONSTANT SIZE    =      3    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     14    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

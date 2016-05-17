@@ -1,0 +1,121 @@
+BL51 BANKED LINKER/LOCATER V6.20                                                        08/16/2014  10:56:43  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.20, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE seg 0-99 up dwn.obj TO seg 0-99 up dwn
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  seg 0-99 up dwn.obj (SEG_0_99_UP_DWN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?COPY)
+
+
+LINK MAP OF MODULE:  seg 0-99 up dwn (SEG_0_99_UP_DWN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0018H     UNIT         _DATA_GROUP_
+            IDATA   0020H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     00F6H     UNIT         ?C?LIB_CODE
+            CODE    08F6H     0095H     UNIT         ?PR?MAIN?SEG_0_99_UP_DWN
+            CODE    098BH     0014H     UNIT         ?CO?SEG_0_99_UP_DWN
+            CODE    099FH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   seg 0-99 up dwn (SEG_0_99_UP_DWN)
+
+
+SEGMENT                            DATA_GROUP 
+  +--> CALLED SEGMENT            START    LENGTH
+------------------------------------------------
+?C_C51STARTUP                    -----    -----
+  +--> ?PR?MAIN?SEG_0_99_UP_DWN
+
+?PR?MAIN?SEG_0_99_UP_DWN         0008H    0018H
+  +--> ?CO?SEG_0_99_UP_DWN
+
+
+
+SYMBOL TABLE OF MODULE:  seg 0-99 up dwn (SEG_0_99_UP_DWN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        SEG_0_99_UP_DWN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+BL51 BANKED LINKER/LOCATER V6.20                                                      08/16/2014  10:56:43  PAGE 2
+
+
+  C:08F6H         PUBLIC        main
+  B:0090H.1       PUBLIC        down
+  C:098BH         SYMBOL        _?ix1000
+  C:0995H         SYMBOL        _?ix1001
+  B:0090H.0       PUBLIC        up
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        i
+  D:000AH         SYMBOL        j
+  D:000CH         SYMBOL        arra1
+  D:0016H         SYMBOL        arra2
+  C:0923H         SYMBOL        start
+  -------         ENDDO         
+  C:08F6H         LINE#         4
+  C:08F6H         LINE#         5
+  C:08F6H         LINE#         6
+  C:08FBH         LINE#         7
+  C:08FFH         LINE#         8
+  C:0910H         LINE#         9
+  C:0923H         LINE#         10
+  C:0923H         LINE#         11
+  C:0923H         LINE#         12
+  C:0923H         LINE#         13
+  C:0926H         LINE#         14
+  C:0926H         LINE#         15
+  C:092EH         LINE#         16
+  C:0945H         LINE#         17
+  C:0945H         LINE#         18
+  C:094DH         LINE#         19
+  C:0952H         LINE#         20
+  C:0952H         LINE#         21
+  C:095DH         LINE#         22
+  C:095DH         LINE#         23
+  C:0963H         LINE#         24
+  C:0969H         LINE#         25
+  C:0969H         LINE#         26
+  C:0971H         LINE#         27
+  C:0979H         LINE#         28
+  C:097CH         LINE#         29
+  C:097CH         LINE#         30
+  C:097FH         LINE#         31
+  C:097FH         LINE#         32
+  C:0989H         LINE#         33
+  C:0989H         LINE#         34
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        SEG_0_99_UP_DWN
+
+  -------         MODULE        ?C?COPY
+  C:08D0H         PUBLIC        ?C?COPY
+  -------         ENDMOD        ?C?COPY
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00A9H BYTE ( 8%) *
+******************************************************************************
+
+Program Size: data=33.0 xdata=0 code=430
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,47 @@
+C51 COMPILER V8.18   1MS_TIMER                                                             08/18/2014 16:31:42 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE 1MS_TIMER
+OBJECT MODULE PLACED IN 1ms timer.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE 1ms timer.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          void TOdelay(void);
+   3          sbit led = P2^0;
+   4          void main()
+   5          {
+   6   1        unsigned int x;
+   7   1         while(1)
+   8   1         {
+   9   2           led=~led;
+  10   2           delay();
+*** WARNING C206 IN LINE 10 OF 1MS TIMER.C: 'delay': missing function-prototype
+  11   2         }
+  12   1       }
+*** WARNING C280 IN LINE 6 OF 1MS TIMER.C: 'x': unreferenced local variable
+  13          void T0delay(void)
+  14          {
+  15   1        TMOD = 0x01;
+  16   1        TH0 = 0xfd;
+  17   1        TL0 = 0x4b;
+  18   1        TR0 = 1;
+  19   1        while(TF0==0);
+  20   1        TR0 = 0;
+  21   1        TF0 = 0;
+  22   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     26    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,200 @@
+C51 COMPILER V8.18   LCDCLK                                                                09/02/2014 12:48:41 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE LCDCLK
+OBJECT MODULE PLACED IN .\hex\lcdclk.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE lcdclk.c BROWSE DEBUG OBJECTEXTEND TABS(2) OBJECT(.\hex\lcdclk.obj)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #define cont_port P3
+   3          #define port P1  
+   4          #define dataport P2  // Data port for LCD
+   5          #define m_sec 10
+   6          sbit rs = cont_port^0;
+   7          sbit rw = cont_port^1;
+   8          sbit en = cont_port^2;
+   9          sbit dig_hr1=port^0;
+  10          sbit dig_min1=port^1;
+  11          sbit start=port^2;
+  12          sbit am_pm=port^3;
+  13          int hr ,hr1=0;
+  14          int min,min1=0;
+  15          int sec,sec1=0,dig_am_pm=0;
+  16          
+  17          void delay(unsigned int msec)   // Time delay funtion
+  18          {
+  19   1      int i,j ;
+  20   1      for(i=0;i<msec;i++)
+  21   1        for(j=0;j<1275;j++);
+  22   1      }
+  23          
+  24                          
+  25          void lcd_cmd(unsigned char item)   // Function to send command on LCD
+  26          {
+  27   1      dataport = item;
+  28   1      rs= 0;
+  29   1      rw=0;
+  30   1      en=1;
+  31   1      delay(1);
+  32   1      en=0;
+  33   1      return;
+  34   1      }
+  35          
+  36          void lcd_data(unsigned char item)  // Function to send data on LCD
+  37          {
+  38   1      dataport = item;
+  39   1      rs= 1;
+  40   1      rw=0;
+  41   1      en=1;
+  42   1      delay(1);
+  43   1      en=0;
+  44   1      return;
+  45   1      }
+  46          
+  47          void lcd_data_string(unsigned char *str)  // Function to send string on LCD
+  48          {
+  49   1        int i=0;
+  50   1        while(str[i]!='\0')
+  51   1      {
+  52   2          lcd_data(str[i]);
+  53   2          i++;
+  54   2          delay(1);
+  55   2      }
+C51 COMPILER V8.18   LCDCLK                                                                09/02/2014 12:48:41 PAGE 2   
+
+  56   1      return;
+  57   1      }
+  58          
+  59          lcd_data_int(int time_val)   // Function to send number on LCD
+  60          {
+  61   1      int int_amt;
+  62   1      int_amt=time_val/10;
+  63   1      lcd_data(int_amt+48);
+  64   1      int_amt=time_val%10; 
+  65   1      lcd_data(int_amt+48);
+  66   1      }
+  67          
+  68          void lcd(unsigned char str1[10])  // Function to initialize LCD
+  69          {
+  70   1      lcd_cmd(0x38);  //2 LINE, 5X7 MATRIX
+  71   1      lcd_cmd(0x0e);  //DISPLAY ON, CURSOR BLINKING
+  72   1      delay(m_sec);
+  73   1      lcd_data_string(str1);
+  74   1      }
+  75          
+  76          void set_hr1()  // Function to set hour
+  77          {
+  78   1      hr1++;
+  79   1      if(hr1>11)
+  80   1      hr1=0;
+  81   1      lcd_cmd(0xc3);
+  82   1      lcd_data_int(hr1);
+  83   1      lcd_data(':');
+  84   1      }
+  85          
+  86          void set_min1()  // Function to set minute
+  87          {
+  88   1      min1++;
+  89   1      if(min1>59)
+  90   1      min1=0;
+  91   1      lcd_cmd(0xc6);
+  92   1      lcd_data_int(min1);
+  93   1      }
+  94          
+  95          void main()
+  96          {
+  97   1      int k;
+  98   1      start=1;
+  99   1      dig_hr1=1;
+ 100   1      dig_min1=1;
+ 101   1      lcd_cmd(0x01);
+ 102   1      lcd_cmd(0x83);
+ 103   1      lcd("SET TIMING");
+ 104   1      lcd_cmd(0xc3);
+ 105   1      lcd_data_int(hr1);
+ 106   1      lcd_data(':');
+ 107   1      lcd_data_int(min1);
+ 108   1      while(start==0)
+ 109   1      {
+ 110   2        delay(10);
+ 111   2        if(dig_hr1==0)
+ 112   2        set_hr1();
+ 113   2        if(dig_min1==0)
+ 114   2        set_min1(); 
+ 115   2      }
+ 116   1      
+ 117   1      if(am_pm==0)
+C51 COMPILER V8.18   LCDCLK                                                                09/02/2014 12:48:41 PAGE 3   
+
+ 118   1      {
+ 119   2        lcd_cmd(0xc8);
+ 120   2        lcd_data_string("am");
+ 121   2        dig_am_pm=0;
+ 122   2      }
+ 123   1      
+ 124   1      if(am_pm==1)
+ 125   1      {
+ 126   2        lcd_cmd(0xc8);
+ 127   2        lcd_data_string("pm");
+ 128   2        dig_am_pm=1;
+ 129   2      }
+ 130   1      delay(200);
+ 131   1      lcd_cmd(0x01);
+ 132   1      while(1)
+ 133   1      {
+ 134   2        for(k=0;k<2;k++)
+ 135   2        {
+ 136   3         for(hr=hr1;hr<12;hr++)
+ 137   3         {
+ 138   4          for(min=min1;min<60;min++)
+ 139   4           {
+ 140   5            for(sec=0;sec<60;sec++)
+ 141   5            {
+ 142   6             lcd_cmd(0x82);
+ 143   6             delay(1);
+ 144   6             lcd_data_int(hr);
+ 145   6             lcd_data(':');
+ 146   6             lcd_data_int(min);
+ 147   6             lcd_data(':');
+ 148   6             lcd_data_int(sec);
+ 149   6             if(dig_am_pm==0)
+ 150   6             {
+ 151   7              lcd("am");
+ 152   7             }
+ 153   6             else
+ 154   6             {
+ 155   7              lcd("pm");
+ 156   7             }
+ 157   6             lcd_data_string("    ");
+ 158   6             delay(100);
+ 159   6            }
+ 160   5           }
+ 161   4          min1=0;
+ 162   4          }
+ 163   3        if(dig_am_pm==0)
+ 164   3        dig_am_pm=1;
+ 165   3        else
+ 166   3        dig_am_pm=0;
+ 167   3        hr1=0;
+ 168   3        }
+ 169   2      }
+ 170   1      }
+*** WARNING C290 IN LINE 66 OF LCDCLK.C: missing return value
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    591    ----
+   CONSTANT SIZE    =     22    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     14      10
+C51 COMPILER V8.18   LCDCLK                                                                09/02/2014 12:48:41 PAGE 4   
+
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

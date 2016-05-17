@@ -1,0 +1,101 @@
+C51 COMPILER V8.18   DEFAULT                                                               08/13/2014 12:38:55 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE DEFAULT
+OBJECT MODULE PLACED IN default.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE default.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include"REGx52.h"
+   2          #define seg_data P2
+   3          sbit seg1=P1^1;
+   4          sbit seg2=P1^2;
+   5          sbit seg3=P1^3;
+   6          int ones=0,tens=0,hundreds=0,l;
+   7          void display_digit(int );
+   8          void delay();
+   9          
+  10          void main()
+  11          {
+  12   1      seg1=seg2=seg3=1;
+  13   1      while(l<=999)
+  14   1      {
+  15   2      ones=l%10;
+  16   2      tens=(l/10)%10;
+  17   2      hundreds=(l/100);
+  18   2      display_digit(ones);
+  19   2      seg1=0;
+  20   2      delay();
+  21   2      seg1=1;
+  22   2      
+  23   2      display_digit(tens);
+  24   2      seg2=0;
+  25   2      delay();
+  26   2      seg2=1;
+  27   2      
+  28   2      display_digit(hundreds);
+  29   2      seg3=0;
+  30   2      delay();
+  31   2      seg3=1;
+  32   2      l++;
+  33   2      }
+  34   1      }
+  35          
+  36          void delay()
+  37          {
+  38   1      long int k;
+  39   1      for(k=0;k<1000;k++);
+  40   1      }
+  41          void display_digit(int c)
+  42          {
+  43   1      switch(c)
+  44   1      {
+  45   2      case 0:
+  46   2      seg_data=0xbf;
+  47   2      break;
+  48   2      case 1:
+  49   2      seg_data=0x06;
+  50   2      break;
+  51   2      case 2:
+  52   2      seg_data=0x5b;
+  53   2      break;
+  54   2      case 3:
+  55   2      seg_data=0x4f;
+C51 COMPILER V8.18   DEFAULT                                                               08/13/2014 12:38:55 PAGE 2   
+
+  56   2      break;
+  57   2      case 4:
+  58   2      seg_data=0x66;
+  59   2      break;
+  60   2      case 5:
+  61   2      seg_data=0x6d;
+  62   2      break;
+  63   2      case 6:
+  64   2      seg_data=0x7d;
+  65   2      break;
+  66   2      case 7:
+  67   2      seg_data=0x07;
+  68   2      break;
+  69   2      case 8:
+  70   2      seg_data=0x7f;
+  71   2      break;
+  72   2      case 9:
+  73   2      seg_data=0x6f;
+  74   2      break;
+  75   2      }
+  76   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    268    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      8       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,40 @@
+C51 COMPILER V8.18   LED1                                                                  08/18/2014 17:28:54 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE LED1
+OBJECT MODULE PLACED IN led1.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE led1.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          void msdelay(unsigned int);
+   3          void main()
+   4          {
+   5   1           unsigned int i;
+   6   1          for(i=0;i<=255;i++)
+   7   1          {
+   8   2             P2 = i;
+   9   2            msdelay(100);
+  10   2           }
+  11   1         } 
+  12          void msdelay(unsigned int itime)
+  13          {
+  14   1        unsigned int j,k;
+  15   1        for(j=0;j<itime;j++)
+  16   1        for(k=0;k<1275;k++);
+  17   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     65    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

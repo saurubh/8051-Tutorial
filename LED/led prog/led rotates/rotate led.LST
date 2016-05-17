@@ -1,0 +1,57 @@
+C51 COMPILER V8.18   ROTATE_LED                                                            09/09/2014 14:57:47 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE ROTATE_LED
+OBJECT MODULE PLACED IN rotate led.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE rotate led.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          void msdelay(unsigned int);
+   3          void main()
+   4          {
+   5   1        unsigned int i;
+   6   1        while(1)
+   7   1        {
+   8   2         for(i=0x01;i<=0x80;i<<=1)
+   9   2            {
+  10   3             P2 = ~i;
+  11   3              msdelay(50);
+  12   3            if(i==0x80)
+  13   3            {
+  14   4              
+  15   4        if(i==0x80)
+  16   4            {
+  17   5              for(i=0x80;i>=0x01;i>>=1)
+  18   5              {
+  19   6                P2 =~i;
+  20   6              msdelay(50);
+  21   6      
+  22   6          }
+  23   5        }
+  24   4      }
+  25   3            }
+  26   2          }
+  27   1        }
+  28          
+  29               void msdelay(unsigned int itime)
+  30               {
+  31   1              unsigned int k,j;
+  32   1             for(k=0;k<itime;k++)
+  33   1             for(j=0;j<1275;j++);
+  34   1           }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    122    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

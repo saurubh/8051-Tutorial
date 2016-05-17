@@ -1,0 +1,45 @@
+C51 COMPILER V8.18   LED_INT                                                               08/20/2014 14:49:45 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE LED_INT
+OBJECT MODULE PLACED IN led int.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE led int.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          sbit led = P2^0;
+   3          void timer(void) interrupt 1
+   4          {
+   5   1        unsigned char x;
+   6   1        led=~led;
+   7   1        for(x=0;x<40;x++)
+   8   1      {
+   9   2        TH0 = 0xA5;              // initialize timer loader value
+  10   2        TL0 = 0xFE;          
+  11   2      }
+  12   1      }
+  13          void main()
+  14          {
+  15   1        TMOD = 0x01;
+  16   1        TH0 = 0xA5;
+  17   1        TL0 = 0xFE;
+  18   1        IE = 0x82;
+  19   1        TR0 = 1;
+  20   1        while(1);
+  21   1      }
+  22              
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     46    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
